@@ -25,9 +25,7 @@
 ;|CaspLock + 123456     | Dev-Hotkey for Visual Studio (Self Defined) |
 ;|CapsLock + 67890-=    | Shifter as Shift                            |
 ;-----------------------o---------------------------------------------o
-;|License:                                                            |
 ;|Use it whatever and wherever you like. Hope it help                 |
-;|I'd be happy if you keep my name here, and doesn't matter if not.   |
 ;=====================================================================o
 
 
