@@ -4,11 +4,11 @@
 ;---------------------------------------------------------------------o
 ;Description:                                                         |
 ;    This Script is wrote by Feng Ruohang via AutoHotKey Script. It   |
-; Provieds an enhancement towards the "Useless Key" CapsLock. It turns|
-; CapsLock into an useful function Key just like Ctrl and Alt by Comb |
-; -ining it with almost all other keys in the keyboard.               |
+; Provieds an enhancement towards the "Useless Key" CapsLock, and     |
+; turns CapsLock into an useful function Key just like Ctrl and Alt   |
+; by combining CapsLock with almost all other keys in the keyboard.   |
 ;                                                                     |
-;Features:                                                            |
+;Summary:                                                             |
 ;o----------------------o---------------------------------------------o
 ;|CapsLock;             | {ESC}  Especially Convient for vim user     |
 ;|CaspLock + `          | {CapsLock}CapsLock Switcher as a Substituent|
@@ -320,8 +320,8 @@ CapsLock & F7:: Send, {Media_Stop}                                   ;|
 ;-----------------------------------o---------------------------------o
 ;                     CapsLock + s  |  Ctrl + Tab (Swith Tag)        ;|
 ;                     CapsLock + q  |  Ctrl + W   (Close Tag)        ;|
-;   (Disabled)  Alt + CapsLock + s  |  AltTab     (Swith Windows)    ;|
-;               Alt + CapsLock + q  |  Ctrl + Tab (Switch Tag)       ;|
+;   (Disabled)  Alt + CapsLock + s  |  AltTab     (Switch Windows)   ;|
+;               Alt + CapsLock + q  |  Ctrl + Tab (Close Windows)    ;|
 ;                     CapsLock + g  |  AppsKey    (Menu Key)         ;|
 ;-----------------------------------o---------------------------------o
 CapsLock & s::Send, ^{Tab}                                           ;|
