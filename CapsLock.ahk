@@ -3,7 +3,7 @@
 ;                      CapsLock Enhancement                           |
 ;---------------------------------------------------------------------o
 ;Description:                                                         |
-;    This Script is wirote by Feng Ruohang via AutoHotKey Script. It  |
+;    This Script is wrote by Feng Ruohang via AutoHotKey Script. It   |
 ; Provieds an enhancement towards the "Useless Key" CapsLock. It turns|
 ; CapsLock into an useful function Key just like Ctrl and Alt by Comb |
 ; -ining it with almost all other keys in the keyboard.               |
