@@ -18,7 +18,7 @@
 ;|CapsLock + zxcvay     | Windows-Style Editor                        |
 ;|CapsLock + Direction  | Mouse Move                                  |
 ;|CapsLock + Enter      | Mouse Click                                 |
-;|CaspLock + {F1}!{F7}  | Media Volume Controller                     |
+;|CaspLock + {F1}~{F6}  | Media Volume Controller                     |
 ;|CapsLock + qs         | Windows & Tags Control                      |
 ;|CapsLock + ;'[]       | Convient Key Mapping                        |
 ;|CaspLock + dfert      | Frequently Used Programs (Self Defined)     |
@@ -301,17 +301,15 @@ CapsLock & b:: Send, ^{Left}                                         ;|
 ;                    CapsLock + F2  |  Volume_Down                   ;|
 ;                    CapsLock + F3  |  Volume_Up                     ;|
 ;                    CapsLock + F3  |  Media_Play_Pause              ;|
-;                    CapsLock + F5  |  Media_Prev                    ;|
-;                    CapsLock + F6  |  Media_Next                    ;|
-;                    CapsLock + F7  |  Media_Stop                    ;|
+;                    CapsLock + F5  |  Media_Next                    ;|
+;                    CapsLock + F6  |  Media_Stop                    ;|
 ;-----------------------------------o---------------------------------o
 CapsLock & F1:: Send, {Volume_Mute}                                  ;|
 CapsLock & F2:: Send, {Volume_Down}                                  ;|
 CapsLock & F3:: Send, {Volume_Up}                                    ;|
 CapsLock & F4:: Send, {Media_Play_Pause}                             ;|
-CapsLock & F5:: Send, {Media_Prev}                                   ;|
-CapsLock & F6:: Send, {Media_Next}                                   ;|
-CapsLock & F7:: Send, {Media_Stop}                                   ;|
+CapsLock & F5:: Send, {Media_Next}                                   ;|
+CapsLock & F6:: Send, {Media_Stop}                                   ;|
 ;---------------------------------------------------------------------o
 
 
