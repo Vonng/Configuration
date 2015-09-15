@@ -1,0 +1,266 @@
+<?xml version="1.0"?>
+	<root>
+		  <modifierdef>MY_CAPSLOCK</modifierdef>
+		  <modifierdef>BLOCK_SELECTION</modifierdef>
+
+
+		  <vkopenurldef>
+		    <name>KeyCode::VK_OPEN_URL_APP_iTerm</name>
+		    <url type="file">/Applications/iTerm.app</url>
+		  </vkopenurldef>
+
+		  <vkopenurldef>
+		    <name>KeyCode::VK_OPEN_URL_APP_editor</name>
+		    <url type="file">/Applications/Visual Studio Code.app</url>
+		  </vkopenurldef>
+
+
+		  <item>
+		    <name>My CapsLock and super key</name>
+		    <appendix>* Change the right shift key to my hyper key.</appendix>
+		    <appendix>* Change the right option key to my super key.</appendix>
+		    <appendix></appendix>
+		    <appendix>* Change hyper+a,s to 1,2.</appendix>
+		    <appendix>* Change super+a,s to brightness controls.</appendix>
+		    <identifier>private.hyper_super</identifier>
+
+		    <!-- Change the right shift key to my hyper key. -->
+		    <autogen>
+		    	__KeyToKey__ KeyCode::F19,
+		    	KeyCode::VK_MODIFIER_MY_CAPSLOCK, 
+		    </autogen>
+		    <!-- Change the right option key to my super key. -->
+		    
+		    <autogen>
+		    	__KeyToKey__ 
+		    	KeyCode::COMMAND_L,ModifierFlag::MY_CAPSLOCK,
+		    	KeyCode::VK_MODIFIER_BLOCK_SELECTION
+		    </autogen>
+
+
+		    <!-- hyper key settings -->
+
+		    <!-- Direction Key -->
+		    <autogen>
+		      __KeyToKey__
+		      KeyCode::BACKQUOTE, ModifierFlag::MY_CAPSLOCK,
+		      KeyCode::VK_LOCK_CAPSLOCK
+		    </autogen>
+
+		    <autogen>
+		      __KeyToKey__
+		      KeyCode::H, ModifierFlag::MY_CAPSLOCK,
+		      KeyCode::CURSOR_LEFT,
+		    </autogen>
+
+		    <autogen>
+		      __KeyToKey__
+		   	  KeyCode::J, ModifierFlag::MY_CAPSLOCK,
+		      KeyCode::CURSOR_DOWN,
+		    </autogen>
+
+		    <autogen>
+		      __KeyToKey__
+		      KeyCode::K, ModifierFlag::MY_CAPSLOCK,
+		      KeyCode::CURSOR_UP,
+		    </autogen>
+
+		    <autogen>
+		      __KeyToKey__
+		      KeyCode::L, ModifierFlag::MY_CAPSLOCK,
+		      KeyCode::CURSOR_RIGHT,
+		    </autogen>
+
+		    <autogen>
+		      __KeyToKey__
+		      KeyCode::I, ModifierFlag::MY_CAPSLOCK,
+		      <!-- KeyCode::A,ModifierFlag::CONTROL_L,-->
+			  KeyCode::HOME,
+		    </autogen>
+
+		    <autogen>
+		      __KeyToKey__
+		      KeyCode::O, ModifierFlag::MY_CAPSLOCK,
+		      <!-- KeyCode::E,ModifierFlag::CONTROL_L,-->
+			  KeyCode::END,
+			</autogen>
+
+		    <autogen>
+		      __KeyToKey__
+		      KeyCode::U, ModifierFlag::MY_CAPSLOCK,
+		      KeyCode::PAGEUP,
+		    </autogen>
+
+		    <autogen>
+		      __KeyToKey__
+		      KeyCode::P, ModifierFlag::MY_CAPSLOCK,
+		      KeyCode::PAGEDOWN,
+			</autogen>
+
+
+
+		    <!-- Deletion Key -->
+		    <autogen>
+		      __KeyToKey__
+		      KeyCode::M, ModifierFlag::MY_CAPSLOCK,
+		      KeyCode::DELETE,
+		    </autogen>
+
+		    <autogen>
+		      __KeyToKey__
+		      KeyCode::N, ModifierFlag::MY_CAPSLOCK,
+		      KeyCode::DELETE, ModifierFlag::CONTROL_L,
+		    </autogen>
+
+		    <autogen>
+		      __KeyToKey__
+		      KeyCode::COMMA, ModifierFlag::MY_CAPSLOCK,
+		      KeyCode::FORWARD_DELETE,ModifierFlag::CONTROL_L,
+			</autogen>
+
+		    <autogen>
+		      __KeyToKey__
+		      KeyCode::DOT, ModifierFlag::MY_CAPSLOCK,
+		      KeyCode::FORWARD_DELETE,ModifierFlag::CONTROL_L,
+			</autogen>
+
+
+		    <!-- Editor Key -->
+		    <autogen>
+		      __KeyToKey__
+		      KeyCode::Z, ModifierFlag::MY_CAPSLOCK,
+		      KeyCode::Z, ModifierFlag::COMMAND_L
+		    </autogen>
+
+		    <autogen>
+		      __KeyToKey__
+		      KeyCode::X, ModifierFlag::MY_CAPSLOCK,
+		      KeyCode::X, ModifierFlag::COMMAND_L
+		    </autogen>
+
+		    <autogen>
+		      __KeyToKey__
+		      KeyCode::C, ModifierFlag::MY_CAPSLOCK,
+		      KeyCode::C, ModifierFlag::COMMAND_L
+			</autogen>
+
+		    <autogen>
+		      __KeyToKey__
+		      KeyCode::V, ModifierFlag::MY_CAPSLOCK,
+		      KeyCode::V, ModifierFlag::COMMAND_L
+			</autogen>
+
+			<!-- Mouse Key -->
+		    <autogen>
+		      __KeyToKey__
+		      KeyCode::G, ModifierFlag::MY_CAPSLOCK,
+		      KeyCode::VK_MOUSEKEY_BUTTON_RIGHT
+			</autogen>
+
+		    <autogen>
+		      __KeyToKey__
+		      KeyCode::RETURN, ModifierFlag::MY_CAPSLOCK,
+		      KeyCode::VK_MOUSEKEY_BUTTON_LEFT
+			</autogen>
+
+
+			<!-- Control Key -->
+		    <autogen>
+		      __KeyToKey__
+		      KeyCode::A, ModifierFlag::MY_CAPSLOCK,
+		      KeyCode::ESCAPE
+		    </autogen>
+
+		    <autogen>
+		      __KeyToKey__
+		      KeyCode::Q, ModifierFlag::MY_CAPSLOCK,
+		      KeyCode::Q, ModifierFlag::COMMAND_L
+		    </autogen>
+
+		    <autogen>
+		      __KeyToKey__
+		      KeyCode::W, ModifierFlag::MY_CAPSLOCK,
+		      KeyCode::W, ModifierFlag::COMMAND_L
+			</autogen>
+
+		    <autogen>
+		      __KeyToKey__
+		      KeyCode::E, ModifierFlag::MY_CAPSLOCK,
+		      KeyCode::F, ModifierFlag::COMMAND_L | ModifierFlag::CONTROL_L
+			</autogen>
+
+		    <autogen>
+		      __KeyToKey__
+		      KeyCode::F, ModifierFlag::MY_CAPSLOCK,
+		      KeyCode::SPACE, ModifierFlag::CONTROL_L
+			</autogen>
+
+		    <autogen>
+		      __KeyToKey__
+		      KeyCode::R, ModifierFlag::MY_CAPSLOCK,
+		      KeyCode::VK_OPEN_URL_APP_iTerm
+			</autogen>
+
+		    <autogen>
+		      __KeyToKey__
+		      KeyCode::T, ModifierFlag::MY_CAPSLOCK,
+		      KeyCode::VK_OPEN_URL_APP_editor
+			</autogen>
+
+			<!-- Selection Key -->
+		    <autogen>
+		      __KeyToKey__
+		      KeyCode::H, ModifierFlag::BLOCK_SELECTION,
+		      KeyCode::CURSOR_LEFT,ModifierFlag::SHIFT_L,
+		    </autogen>
+
+		    <autogen>
+		      __KeyToKey__
+		   	  KeyCode::J, ModifierFlag::BLOCK_SELECTION,
+		      KeyCode::CURSOR_DOWN,ModifierFlag::SHIFT_L,
+		    </autogen>
+
+		    <autogen>
+		      __KeyToKey__
+		      KeyCode::K, ModifierFlag::BLOCK_SELECTION,
+		      KeyCode::CURSOR_UP,ModifierFlag::SHIFT_L,
+		    </autogen>
+
+		    <autogen>
+		      __KeyToKey__
+		      KeyCode::L, ModifierFlag::BLOCK_SELECTION,
+		      KeyCode::CURSOR_RIGHT,ModifierFlag::SHIFT_L,
+		    </autogen>
+
+		    <autogen>
+		      __KeyToKey__
+		      KeyCode::I, ModifierFlag::BLOCK_SELECTION,
+		      <!--KeyCode::A,ModifierFlag::CONTROL_L | ModifierFlag::SHIFT_L-->
+			  KeyCode::HOME, ModifierFlag::SHIFT_L
+		    </autogen>
+
+		    <autogen>
+		      __KeyToKey__
+		      KeyCode::O, ModifierFlag::BLOCK_SELECTION,
+		      <!--KeyCode::E, ModifierFlag::CONTROL_L | ModifierFlag::SHIFT_L,-->
+			  KeyCode::END, ModifierFlag::SHIFT_L
+			</autogen>
+
+		    <autogen>
+		      __KeyToKey__
+		      KeyCode::U, ModifierFlag::BLOCK_SELECTION,
+		      KeyCode::PAGEUP, ModifierFlag::SHIFT_L,
+		    </autogen>
+
+		    <autogen>
+		      __KeyToKey__
+		      KeyCode::P, ModifierFlag::BLOCK_SELECTION,
+		      KeyCode::PAGEDOWN, ModifierFlag::SHIFT_L,
+			</autogen>
+
+
+		    <!-- super key settings -->
+
+		  </item>
+
+	</root>

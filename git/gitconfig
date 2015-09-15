@@ -1,0 +1,58 @@
+[user]
+	email = fengruohang@outlook.com
+	name = Feng Ruohang
+[alias]
+	st = status
+	fetchv=fetch -v
+	pullv=pull -v
+	addtracked=add -u
+	gn=grep -n
+	gi=grep -n -i
+	ci=commit
+	ca=commit -a
+	cia=commit --amend
+	di=diff --ignore-space-at-eol -w -b
+	ds=diff --stat
+	dic=diff --cached
+	dih=diff HEAD
+	wc=whatchanged --oneline
+	ss=stash list
+	st=status
+	s=status -sb
+	br=branch
+	rb=branch -r
+	bd=branch -d	
+	b=branch -a -v
+	bm=branch -a --merged
+	bn=branch -a --no-merged
+	bc=branch -a --contains
+	co=checkout
+	track=checkout --track
+	w=shortlog -s -n --since='1 week ago' --no-merges
+	m=shortlog -s -n --since='1 month ago' --no-merges
+	d=shortlog -s -n --since='2 day ago' --no-merges
+	lost=reflog
+	prepush=log --graph --stat origin/master..
+	h=!git log --pretty=format:\"%h %Cred%an%Creset@%ar - %Cgreen%s%Creset\"
+	his=!git log --numstat --pretty=format:\"%Cred%an%Creset@%ar %Cgreen%s%Creset\" HEAD
+	last=log -1 -p HEAD
+	hd=log -2 HEAD
+	lg=log --date=local
+	ls=log --stat --summary --date=local
+	ll=log -p --date=local
+	llw=log -p --date=local --word-diff
+	u=log --stat --summary --date=local --author
+	uu=log -p --date=local --author
+	bl=blame --show-stats
+	bll=blame -L
+	bls=blame --show-stats -s
+	kx=svn rebase
+	rem=remote -v
+	lsr=ls-remote
+	unstage=reset HEAD --
+	goto=reset --hard 
+	undomerge=reset --hard HEAD
+	mg=merge --no-ff
+	datetag=!git tag `date \"+%Y%m%d%H%M\"`
+	tags=tag -n10
+	export=archive --format zip master --output
