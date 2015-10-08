@@ -56,3 +56,7 @@
 	datetag=!git tag `date \"+%Y%m%d%H%M\"`
 	tags=tag -n10
 	export=archive --format zip master --output
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true

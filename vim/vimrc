@@ -68,3 +68,9 @@ set listchars=tab:»·,nbsp:·,trail:·
 let g:riv_disable_folding = 1
 " change riv browser to chrome
 let g:riv_web_browser = "chrome"
+
+
+set hlsearch
+set autoindent
+set ruler
+
