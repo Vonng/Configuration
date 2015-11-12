@@ -34,7 +34,7 @@ alias tarx="tar -zxvf"
 alias tarc="tar -zxcf"
 #================================================================================
 # Convient Applications
-alias oss='python ~/usr/bin/OSS_Python_API_20151106/osscmd'
+alias osscmd='python ~/usr/bin/OSS_Python_API_20151106/osscmd'
 #===============================================================================
 #快捷编辑
 alias vibashrc='vim ~/.bashrc'
