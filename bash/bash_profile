@@ -4,7 +4,7 @@ export PATH="$HOME/bin:$PATH";
 # Load the shell dotfiles, and then some:
 # * ~/.bash_inc/path can be used to extend `$PATH`.
 # * ~/.bash_inc/extra can be used for custom settings.
-for file in ~/.bash_inc/{path,bash_prompt,exports,aliases,functions,extra}; do
+for file in ~/.bash_inc/{path,bash_prompt,exports,aliases,functions,shortcuts,machines}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
@@ -46,3 +46,15 @@ complete -W "NSGlobalDomain" defaults;
 
 # Add `killall` tab completion for common apps
 complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
+
+##
+# Your previous /Users/vonng/.bash_profile file was backed up as /Users/vonng/.bash_profile.macports-saved_2015-12-03_at_17:41:08
+##
+
+# MacPorts Installer addition on 2015-12-03_at_17:41:08: adding an appropriate PATH variable for use with MacPorts.
+export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+# Finished adapting your PATH environment variable for use with MacPorts.
+
+
+# added by Anaconda2 2.4.1 installer
+export PATH="/Users/vonng/usr/local/anaconda/bin:$PATH"

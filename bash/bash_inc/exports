@@ -1,3 +1,6 @@
+# Convient Debug Variable
+export MY_IPHONE_MAC="fc:fc:48:d1:20:c9"
+
 # Make vim the default editor
 export EDITOR="vim";
 

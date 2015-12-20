@@ -1,6 +1,6 @@
 [user]
-	email = fengruohang@outlook.com
-	name = Feng Ruohang
+	email = ruohang.frh@alibaba-inc.com
+	name = ruohang.frh
 [alias]
 	st = status
 	fetchv=fetch -v
@@ -60,3 +60,5 @@
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
 	required = true
+[core]
+	autocrlf = input
