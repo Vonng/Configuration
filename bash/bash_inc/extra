@@ -1,67 +1,54 @@
 #!/usr/bin/env bash
 #=============================================================================#
-# Vonng's Environment Export
+# Vonng's Extra bash settings
 #   Author: vonng (fengruohang@outlook.com)
 #=============================================================================#
 
 #—————————————————————————————————————————————————————————————————————————————#
-# Vim
-# Make vim the default editor
-export EDITOR="vim";
-#—————————————————————————————————————————————————————————————————————————————#
-
-
-#—————————————————————————————————————————————————————————————————————————————#
-# Bash
-# Larger bash history (allow 32³ entries; default is 500)
-export HISTSIZE=32768;
-export HISTFILESIZE=$HISTSIZE;
-export HISTCONTROL=ignoredups;
-# Make some commands not show up in history
-#export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help";
+# Data Source
+alias cnzzdb_dev="mysql -htddl.daily.alibaba.net -uCNZZDB_APP -p123456 -P3306"
+alias up="cd %HOME/Dev;oss put elysium;"
+alias cdv="cd /Volumes/Data//vserver"
+alias cdpg="cd /usr/local/pgsql"
+alias cdng="cd /usr/local/nginx"
 #—————————————————————————————————————————————————————————————————————————————#
 
 #—————————————————————————————————————————————————————————————————————————————#
-# Locale
-# Prefer US English and use UTF-8
-#export LANG="en_US.UTF-8";
-#export LC_ALL="en_US.UTF-8";
+# Data Source
+alias cnzzdb_dev="mysql -htddl.daily.alibaba.net -uCNZZDB_APP -p123456 -P3306"
 #—————————————————————————————————————————————————————————————————————————————#
 
 #—————————————————————————————————————————————————————————————————————————————#
-# Man
-# Highlight section titles in manual pages
-export LESS_TERMCAP_md="${yellow}";
-
-# Don’t clear the screen after quitting a manual page
-export MANPAGER="less -X";
+# Conf Edit shortcuts
+alias virc='vim $HOME/.bashrc'
+alias viprofile='vim $HOME/.bash_profile'
+alias vipath='vim $HOME/.bash_inc/path'
+alias viexport='vim $HOME/.bash_inc/export'
+alias vialias='vim $HOME/.bash_inc/aliases'
+alias vifunction='vim $HOME/.bash_inc/functions'
+alias viextra='vim $HOME/.bash_inc/extra'
+alias vissh='vim $HOME/.ssh/config'
+alias vinginx="vim /usr/local/nginx/conf/nginx.conf"
+alias vihost='vi /etc/hosts'
 #—————————————————————————————————————————————————————————————————————————————#
 
 #—————————————————————————————————————————————————————————————————————————————#
-# Grep
-# Always enable colored `grep` output
-export GREP_OPTIONS="--color=auto";
+# Fast directories movement
+alias cddev='cd $HOME/Dev'
+alias cdgit='cd $HOME/Git'
+alias cddown='cd $HOME/Downloads'
+alias cdusr='cd $HOME/usr'
 #—————————————————————————————————————————————————————————————————————————————#
 
 #—————————————————————————————————————————————————————————————————————————————#
-# Homebrew
-# Link Homebrew casks in `/Applications` rather than `~/Applications`
-# export HOMEBREW_CASK_OPTS="--appdir=/Applications";
+# Jupyter
+alias qt="nohup jupyter qtconsole &"
 #—————————————————————————————————————————————————————————————————————————————#
 
 #—————————————————————————————————————————————————————————————————————————————#
-# Maven
-# MAVEN_OPTS='-Xms256m -Xmx512m'
-#—————————————————————————————————————————————————————————————————————————————#
-
-#—————————————————————————————————————————————————————————————————————————————#
-# Node
-# ES6 Compatible Mode
-# NODE_ENV="development"
-# NODE="`which node` --use-strict $(node --v8-options | grep harm | awk '{print $1}' | xargs)"
-#—————————————————————————————————————————————————————————————————————————————#
-
-#—————————————————————————————————————————————————————————————————————————————#
-# Other
-export MY_IPHONE_MAC="fc:fc:48:d1:20:c9"
+# Taobao NPM
+alias cnpm="npm --registry=https://registry.npm.taobao.org \
+--cache=$HOME/.npm/.cache/cnpm \
+--disturl=https://npm.taobao.org/dist \
+--userconfig=$HOME/.cnpmrc"
 #—————————————————————————————————————————————————————————————————————————————#

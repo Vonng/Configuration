@@ -1,1 +1,3 @@
+#!/usr/bin/env bash
+# Invoke when shell starting a interactive shell
 [ -n "$PS1" ] && source ~/.bash_profile;

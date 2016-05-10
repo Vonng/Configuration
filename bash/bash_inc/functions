@@ -1,9 +1,77 @@
-# Better view of svn diff
-function svndiff()
+#!/usr/bin/env bash
+#=============================================================================#
+# Vonng's Bash Function
+#   Author: vonng (fengruohang@outlook.com)
+#=============================================================================#
+
+#—————————————————————————————————————————————————————————————————————————————#
+# Linux Setup Info
+function setup_linux()
 {
-    svn diff "$@" | vim -R -
+    echo "Dev:"
+    echo "osscmd get oss://vonng/conf.tar.gz conf.tar.gz ;tar -zxvf conf.tar.gz;cd conf;bash setup.sh;cd ..;rm -rf conf conf.tar.gz;"
+
+    echo "Prod:"
+    echo "osscmd get oss://vonng/conf.tar.gz conf.tar.gz ;tar -zxf conf.tar.gz;cd conf;bash setup.sh prod;cd ..;rm -rf conf conf.tar.gz;"
+
+    echo "Dev Update"
+    echo "oss getd conf;cd conf;bash setup.sh;cd ..;rm -rf conf;"
+
+    echo "Prod Update"
+    echo "oss getd conf;cd conf;bash setup.sh prod;cd ..;rm -rf conf;"
+}
+#—————————————————————————————————————————————————————————————————————————————#
+
+#—————————————————————————————————————————————————————————————————————————————#
+# Tar gz Util
+function tc()
+{
+    echo $1
+    tar -zcf "$1.tar.gz" "$1"
 }
 
+function tx()
+{
+    tar -zxf $1
+}
+#—————————————————————————————————————————————————————————————————————————————#
+
+
+#—————————————————————————————————————————————————————————————————————————————#
+# OSS
+function ossgui()
+{
+    JRE_PATH=/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/bin/java
+    OSS_PATH=/Users/vonng/usr/bin/ossbrowser.jar
+    cd $HOME/usr/tmp
+    $JRE_PATH -jar $OSS_PATH &
+}
+
+function ossget()
+{
+	osscmd get "oss://vonng/$1" $1;
+}
+
+function ossput()
+{
+	osscmd put "$1 oss://vonng/$1";
+}
+
+#—————————————————————————————————————————————————————————————————————————————#
+
+#—————————————————————————————————————————————————————————————————————————————#
+# SSH-key
+function sendkey()
+{
+    PUBLIC_KEY=$HOME/.ssh/id_rsa.pub
+    scp $PUBLIC_KEY "$1:~/key"
+    echo "Run: "
+    echo "      ssh $1"
+    echo "      cat key >> ~/.ssh/authorized_keys;rm -f key;"
+}
+#—————————————————————————————————————————————————————————————————————————————#
+
+#—————————————————————————————————————————————————————————————————————————————#
 # Simple calculator
 function calc() {
     local result="";
@@ -21,17 +89,23 @@ function calc() {
     fi;
     printf "\n";
 }
+#—————————————————————————————————————————————————————————————————————————————#
 
+#—————————————————————————————————————————————————————————————————————————————#
 # Create a new directory and enter it
 function mkd() {
     mkdir -p "$@" && cd "$@";
 }
+#—————————————————————————————————————————————————————————————————————————————#
 
+#—————————————————————————————————————————————————————————————————————————————#
 # Change working directory to the top-most Finder window location
 function cdf() { # short for `cdfinder`
     cd "$(osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)')";
 }
+#—————————————————————————————————————————————————————————————————————————————#
 
+#—————————————————————————————————————————————————————————————————————————————#
 # Create a .tar.gz archive, using `zopfli`, `pigz` or `gzip` for compression
 function targz() {
     local tmpFile="${@%/}.tar";
@@ -59,7 +133,9 @@ function targz() {
     [ -f "${tmpFile}" ] && rm "${tmpFile}";
     echo "${tmpFile}.gz created successfully.";
 }
+#—————————————————————————————————————————————————————————————————————————————#
 
+#—————————————————————————————————————————————————————————————————————————————#
 # Determine size of a file or total size of a directory
 function fs() {
     if du -b /dev/null > /dev/null 2>&1; then
@@ -73,7 +149,9 @@ function fs() {
         du $arg .[^.]* *;
     fi;
 }
+#—————————————————————————————————————————————————————————————————————————————#
 
+#—————————————————————————————————————————————————————————————————————————————#
 # Use Git’s colored diff when available
 hash git &>/dev/null;
 if [ $? -eq 0 ]; then
@@ -81,7 +159,9 @@ if [ $? -eq 0 ]; then
         git diff --no-index --color-words "$@";
     }
 fi;
+#—————————————————————————————————————————————————————————————————————————————#
 
+#—————————————————————————————————————————————————————————————————————————————#
 # Create a data URL from a file
 function dataurl() {
     local mimeType=$(file -b --mime-type "$1");
@@ -90,7 +170,9 @@ function dataurl() {
     fi
     echo "data:${mimeType};base64,$(openssl base64 -in "$1" | tr -d '\n')";
 }
+#—————————————————————————————————————————————————————————————————————————————#
 
+#—————————————————————————————————————————————————————————————————————————————#
 # Create a git.io short URL
 function gitio() {
     if [ -z "${1}" -o -z "${2}" ]; then
@@ -99,7 +181,9 @@ function gitio() {
     fi;
     curl -i http://git.io/ -F "url=${2}" -F "code=${1}";
 }
+#—————————————————————————————————————————————————————————————————————————————#
 
+#—————————————————————————————————————————————————————————————————————————————#
 # Start an HTTP server from a directory, optionally specifying the port
 function server() {
     local port="${1:-8000}";
@@ -108,7 +192,9 @@ function server() {
     # And serve everything as UTF-8 (although not technically correct, this doesn’t break anything for binary files)
     python -c $'import SimpleHTTPServer;\nmap = SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map;\nmap[""] = "text/plain";\nfor key, value in map.items():\n\tmap[key] = value + ";charset=UTF-8";\nSimpleHTTPServer.test();' "$port";
 }
+#—————————————————————————————————————————————————————————————————————————————#
 
+#—————————————————————————————————————————————————————————————————————————————#
 # Start a PHP server from a directory, optionally specifying the port
 # (Requires PHP 5.4.0+.)
 function phpserver() {
@@ -117,7 +203,9 @@ function phpserver() {
     sleep 1 && open "http://${ip}:${port}/" &
     php -S "${ip}:${port}";
 }
+#—————————————————————————————————————————————————————————————————————————————#
 
+#—————————————————————————————————————————————————————————————————————————————#
 # Compare original and gzipped file size
 function gz() {
     local origsize=$(wc -c < "$1");
@@ -126,7 +214,9 @@ function gz() {
     printf "orig: %d bytes\n" "$origsize";
     printf "gzip: %d bytes (%2.2f%%)\n" "$gzipsize" "$ratio";
 }
+#—————————————————————————————————————————————————————————————————————————————#
 
+#—————————————————————————————————————————————————————————————————————————————#
 # Syntax-highlight JSON strings or files
 # Usage: `json '{"foo":42}'` or `echo '{"foo":42}' | json`
 function json() {
@@ -136,12 +226,16 @@ function json() {
         python -mjson.tool | pygmentize -l javascript;
     fi;
 }
+#—————————————————————————————————————————————————————————————————————————————#
 
+#—————————————————————————————————————————————————————————————————————————————#
 # Run `dig` and display the most useful info
 function digga() {
     dig +nocmd "$1" any +multiline +noall +answer;
 }
+#—————————————————————————————————————————————————————————————————————————————#
 
+#—————————————————————————————————————————————————————————————————————————————#
 # UTF-8-encode a string of Unicode symbols
 function escape() {
     printf "\\\x%s" $(printf "$@" | xxd -p -c1 -u);
@@ -150,7 +244,9 @@ function escape() {
         echo ""; # newline
     fi;
 }
+#—————————————————————————————————————————————————————————————————————————————#
 
+#—————————————————————————————————————————————————————————————————————————————#
 # Decode \x{ABCD}-style Unicode escape sequences
 function unidecode() {
     perl -e "binmode(STDOUT, ':utf8'); print \"$@\"";
@@ -159,7 +255,9 @@ function unidecode() {
         echo ""; # newline
     fi;
 }
+#—————————————————————————————————————————————————————————————————————————————#
 
+#—————————————————————————————————————————————————————————————————————————————#
 # Get a character’s Unicode code point
 function codepoint() {
     perl -e "use utf8; print sprintf('U+%04X', ord(\"$@\"))";
@@ -168,7 +266,9 @@ function codepoint() {
         echo ""; # newline
     fi;
 }
+#—————————————————————————————————————————————————————————————————————————————#
 
+#—————————————————————————————————————————————————————————————————————————————#
 # Show all the names (CNs and SANs) listed in the SSL certificate
 # for a given domain
 function getcertnames() {
@@ -202,29 +302,35 @@ function getcertnames() {
         return 1;
     fi;
 }
+#—————————————————————————————————————————————————————————————————————————————#
 
+#—————————————————————————————————————————————————————————————————————————————#
 # `s` with no arguments opens the current directory in Sublime Text, otherwise
 # opens the given location
 # Note that on Mac OS X, `subl` can be found at:
 #   /Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl
 function s() {
     if [ $# -eq 0 ]; then
-        subl .;
+        /Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl .;
     else
-        subl "$@";
+        /Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl "$@";
     fi;
 }
+#—————————————————————————————————————————————————————————————————————————————#
 
+#—————————————————————————————————————————————————————————————————————————————#
 # `a` with no arguments opens the current directory in Atom Editor, otherwise
 # opens the given location
-function a() {
-    if [ $# -eq 0 ]; then
-        atom .;
-    else
-        atom "$@";
-    fi;
-}
+#function a() {
+#    if [ $# -eq 0 ]; then
+#        atom .;
+#    else
+#        atom "$@";
+#    fi;
+#}
+#—————————————————————————————————————————————————————————————————————————————#
 
+#—————————————————————————————————————————————————————————————————————————————#
 # `v` with no arguments opens the current directory in Vim, otherwise opens the
 # given location
 function v() {
@@ -234,7 +340,9 @@ function v() {
         vim "$@";
     fi;
 }
+#—————————————————————————————————————————————————————————————————————————————#
 
+#—————————————————————————————————————————————————————————————————————————————#
 # `o` with no arguments opens the current directory, otherwise opens the given
 # location
 function o() {
@@ -244,7 +352,9 @@ function o() {
         open "$@";
     fi;
 }
+#—————————————————————————————————————————————————————————————————————————————#
 
+#—————————————————————————————————————————————————————————————————————————————#
 # `tre` is a shorthand for `tree` with hidden files and color enabled, ignoring
 # the `.git` directory, listing directories first. The output gets piped into
 # `less` with options to preserve color and line numbers, unless the output is
@@ -252,3 +362,12 @@ function o() {
 function tre() {
     tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
 }
+#—————————————————————————————————————————————————————————————————————————————#
+
+#—————————————————————————————————————————————————————————————————————————————#
+# `code` for VS Code
+function code ()
+{
+    VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args "$@";
+}
+#—————————————————————————————————————————————————————————————————————————————#

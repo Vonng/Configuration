@@ -1,43 +1,54 @@
-#!/bin/sh
+#!/usr/bin/env bash
 #=============================================================================#
-# Vonng's Bash Profile Setup script
+# Vonng's Path
 #   Author: vonng (fengruohang@outlook.com)
-#   Run this script to setup configurations
 #=============================================================================#
 
 #—————————————————————————————————————————————————————————————————————————————#
-echo "#=============================================================#"
-echo "# Setup configurations"
+# User's resource
+MY_USR="$HOME/usr"
+MY_BIN="$MY_USR/bin"
+MY_CONF="$MY_USR/conf"
+MY_LOCAL="$MY_USR/local"
+MY_INCLUDE="$MY_USR/include"
+MY_LIB="$MY_USR/lib"
+MY_SCRIPT="$MY_USR/script"
+
+PATH="$MY_BIN:$MY_SCRIPT:$PATH"
 #—————————————————————————————————————————————————————————————————————————————#
-# Mode: prod | dev
-# Influence ssh config
-MODE=$1
-# Directory setup
-INSTALL_DIRECTORY=$HOME/usr/
-mkdir -p $INSTALL_DIRECTORY
-mkdir -p $INSTALL_DIRECTORY/bin
-mkdir -p $INSTALL_DIRECTORY/tmp
-mkdir -p $INSTALL_DIRECTORY/lib
-mkdir -p $INSTALL_DIRECTORY/conf
-mkdir -p $INSTALL_DIRECTORY/local
-mkdir -p $INSTALL_DIRECTORY/script
-mkdir -p $INSTALL_DIRECTORY/include
+
+
 #—————————————————————————————————————————————————————————————————————————————#
-# Bash
-bash/setup_bash.sh $MODE
+# Software
+#-----------------------------#
+# Python
+ANACONDA_HOME="/usr/local/anaconda"
+PATH="$ANACONDA_HOME/bin:$PATH"
+PYTHONPATH=/usr/local/anaconda/lib/python2.7/site-packages/
+#-----------------------------#
+# Java
+# JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+# MAVEN_HOME=/Users/vonng/usr/local/apache-maven-3.3.3
+# M2_HOME=$MAVEN_HOME
+# PATH="$JAVA_HOME/bin:$PATH"
+#-----------------------------#
+# Go
+# GOROOT=/usr/local/go
+# GOPATH=$HOME/Dev/Go
+#-----------------------------#
+# Node
+# NODE_HOME=/usr/local/node
+# PATH="$NODE_HOME/bin:$PATH"
+#-----------------------------#
+# PostgreSQL
+PGSQL_HOME="/usr/local/pgsql"
+PATH="$PGSQL_HOME/bin:$PATH"
 #—————————————————————————————————————————————————————————————————————————————#
-# Git
-git/setup_git.sh $MODE
+
 #—————————————————————————————————————————————————————————————————————————————#
-# Vim
-vim/setup_vim.sh $MODE
-#—————————————————————————————————————————————————————————————————————————————#
-# SSH
-ssh/setup_ssh.sh $MODE
-#—————————————————————————————————————————————————————————————————————————————#
-# Script
- script/setup_script.sh $MODE
-#—————————————————————————————————————————————————————————————————————————————#
-echo "# Configuration setup done."
-echo "#=============================================================#"
+# Export
+export PATH
+export PYTHONPATH
+export MY_USR
+export MY_SCRIPT
 #—————————————————————————————————————————————————————————————————————————————#

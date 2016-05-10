@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+
+#!/usr/bin/env bash
+
+ACTION=$1
+PORT=$2
+WORKING_DIR=$3
+
+DEFAULT_PORT=6379
+#DEFAULT_WORKING_DIR=`pwd`
+DEFAULT_WORKING_DIR="$HOME/Data"
+
+
+if [ -z $PORT ]; then
+    PORT="$DEFAULT_PORT"
+fi
+
+if [ -z $WORKING_DIR ]; then
+    WORKING_DIR="$HOME/Data"
+fi
+
+REDIS_SERVER=`which redis-server`
+REDIS_CLIENT=`which redis-cli`
+
+PIDFILE="$HOME/usr/run/redis_${PORT}.pid"
+CONF="$HOME/usr/conf/redis_${PORT}.conf"
+
+
+
+case "$1" in
+    start)
+        if [ -f $PIDFILE ]
+        then
+                echo "$PIDFILE exists, process is already running or crashed"
+        else
+                echo "Starting Redis server..."
+                cd $WORKING_DIR
+                $REDIS_SERVER $CONF
+                cd -
+        fi
+        ;;
+    stop)
+        if [ ! -f $PIDFILE ]
+        then
+                echo "$PIDFILE does not exist, process is not running"
+        else
+                PID=$(cat $PIDFILE)
+                echo "Stopping ..."
+                $REDIS_CLIENT -p $PORT shutdown
+                while [ -x /proc/${PID} ]
+                do
+                    echo "Waiting for Redis to shutdown ..."
+                    sleep 1
+                done
+                echo "Redis stopped"
+        fi
+        ;;
+    *)
+        $REDIS_CLIENT -p $PORT
+        ;;
+esac

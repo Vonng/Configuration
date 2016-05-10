@@ -1,0 +1,10 @@
+# Created by .ignore support plugin (hsz.mobi)
+
+# IDE Files
+.idea
+
+# Sys Files
+.DS_Store
+
+# Privacy
+ssh/

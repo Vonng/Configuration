@@ -1,39 +1,37 @@
 #!/bin/sh
 #=============================================================================#
-# Vonng's Git Setup script
+# Vonng's Bash Profile Setup script
 #   Author: vonng (fengruohang@outlook.com)
-#   Run this script to setup git configurations
+#   Run this script to setup configurations
 #=============================================================================#
 
 #—————————————————————————————————————————————————————————————————————————————#
 echo "#=============================================================#"
-echo "# Configuring git settings..."
+echo "# Configuring bin & scripts settings..."
 #—————————————————————————————————————————————————————————————————————————————#
 
 #—————————————————————————————————————————————————————————————————————————————#
-# Git Setup
-git config --global user.name "墨航"
-git config --global user.email "ruohang.frh@alibaba-inc.com"
-
-# Setup git config
-CONFIG_DST=$HOME/.gitconfig
-CONFIG_DIR=$HOME/usr/conf/git
+# Setup directories
+PLATFORM=`uname -a | awk  '{print $1}'`
 SRC_DIR=$(cd `dirname $0`; pwd)
+TARGET_DIR=$HOME/usr/bin/
 
-# Backup old settings
-BACKUP_DIR=$HOME/.config_backup
-mkdir -p $BACKUP_DIR
-if [ -f "$CONFIG_DST" ]; then
-  mv $CONFIG_DST $BACKUP_DIR/.gitconfig
-fi
-
-# Make conf holder
-mkdir -p $CONFIG_DIR
-cp -r $SRC_DIR/gitconfig $CONFIG_DIR/
-
-rm -rf $CONFIG_DST
-ln -s $CONFIG_DIR/gitconfig $CONFIG_DST
-
-echo "# Git setup done."
+case "$PLATFORM" in
+    Linux)
+        mkdir -p $TARGET_DIR
+        cp -r $SRC_DIR/linux/* $TARGET_DIR
+        cp -r $SRC_DIR/common/* $TARGET_DIR
+        ;;
+    Darwin)
+        mkdir -p $TARGET_DIR
+        cp -r $SRC_DIR/mac/* $TARGET_DIR
+        cp -r $SRC_DIR/common/* $TARGET_DIR
+        ;;
+    *)
+        echo "Platform not supported!"
+        ;;
+esac
+#—————————————————————————————————————————————————————————————————————————————#
+echo "# Bin & scripts setup done."
 echo "#=============================================================#"
 #—————————————————————————————————————————————————————————————————————————————#

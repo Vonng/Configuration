@@ -1,11 +1,11 @@
 # Configuration
-##Configuration via Github
 
-Actually These are personalized configuration files.
-
-#bash:      bash profile in mac
-#vim:       vimrc, vim plugins, etc...
-#git:       gitconfig
-
-#win_ahk:   AHK Scripts for windows
+Personal configuration files.
+* bash settings
+* vim settings
+* git settings
+* ssh settings [ignored]
+* IDE settings (PyCharm)
+* Windows utils
+* other conf files
 

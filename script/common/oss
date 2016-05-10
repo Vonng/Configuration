@@ -1,0 +1,191 @@
+#!/usr/bin/env python
+from __future__ import print_function
+import sys
+import os, os.path as p
+import oss2
+import requests
+import datetime, time
+import ConfigParser
+import tarfile
+
+reload(sys)
+sys.setdefaultencoding("utf-8")
+
+auth = oss2.Auth('A0i46bBuWPUQjUzN', 'TvcsQxOTPCwRDU3nRGMfdEzmWN2bsN')
+service = oss2.Service(auth, 'oss-cn-hangzhou-zmf.aliyuncs.com')
+buc = oss2.Bucket(auth, 'oss-cn-hangzhou-zmf.aliyuncs.com', 'vonng')
+
+
+class OSSCMD(object):
+    def __init__(self, access_id='A0i46bBuWPUQjUzN', access_key='TvcsQxOTPCwRDU3nRGMfdEzmWN2bsN',
+                 end_point='oss-cn-hangzhou-zmf.aliyuncs.com', bucket='vonng'):
+        self.auth = oss2.Auth(access_id, access_key)
+        self.service = oss2.Service(self.auth, end_point)
+        self.bucket = oss2.Bucket(self.auth, end_point, bucket)
+        self.prefix = 'oss://%s/' % bucket
+
+    def get_bucs(self):
+        return [b.name for b in oss2.BucketIterator(service)]
+
+    def list_files(self):
+        result = []
+        fmt_string = "%-34s%-5s%-22s%-10s"
+        print(fmt_string % ('etag', 'size', 'last_modified', 'filename'))
+        print("------------------------------------------------------------------------------------------------")
+        for obj in oss2.ObjectIterator(self.bucket):
+            result.append(obj.key)
+            print(fmt_string % (
+                obj.etag, self.bytes2human(obj.size), datetime.datetime.fromtimestamp(obj.last_modified), obj.key))
+        return result
+
+    def upload_dir(self, local_dir):
+        dirname = p.basename(local_dir)
+        tar_path = "/tmp/%s.tar.gz" % dirname
+        tar = tarfile.open(tar_path, "w:gz")
+        os.chdir(p.join(local_dir, '..'))
+        tar.add(dirname)
+        tar.close()
+        key = dirname + '.tar.gz'
+        self.upload_file(tar_path, key)
+        os.remove(tar_path)  # Tear down
+
+    def upload_file(self, local, key=None):
+        if not key:
+            remote = p.basename(local)
+        print('Executing upload task...\n[Local]: %s -> [remote]: %s' % (local, self.prefix + key))
+        result = self.bucket.put_object_from_file(key, local, None, self.percentage)
+        print('Upload task done...')
+        return result
+
+    def upload_url(self, url, key):
+        input = requests.get(url)
+        print('Executing upload(via URL) task...\n[URL]: %s -> [remote]: %s' % (url, self.prefix + key))
+        result = self.bucket.put_object(key, input)
+        print('Upload(url) task done...')
+        return result
+
+    def download(self, key, path):
+        print('Executing download task...\n[remote]: %s -> [local]: %s' % (self.prefix + key, path))
+        result = self.bucket.get_object_to_file(key, path, progress_callback=self.percentage)
+        print('Download task done...')
+        return result
+
+    def share(self, key, expire=3600):
+        result = self.bucket.sign_url('GET', key, expire)
+        expire_time = datetime.datetime.fromtimestamp(time.time() + expire)
+        print('Share Object [%s]: Expire@%s\nLink: %s' % (key, expire_time, result))
+        return result
+
+    def delete(self, key):
+        print('Executing deletion task...\n[Remote]: %s' % (self.prefix + key))
+        result = self.bucket.delete_object(key)
+        return result
+
+    @staticmethod
+    def percentage(consumed_bytes, total_bytes):
+        if total_bytes:
+            rate = int(100 * (float(consumed_bytes) / float(total_bytes)))
+            print('\r{0}% '.format(rate), end='')
+            sys.stdout.flush()
+
+    @staticmethod
+    def bytes2human(n):
+        symbols = ('K', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y')
+        prefix = {}
+        for i, s in enumerate(symbols):
+            prefix[s] = 1 << (i + 1) * 10
+
+        for s in reversed(symbols):
+            if n >= prefix[s]:
+                value = int(float(n) / prefix[s])
+                return '%s%s' % (value, s)
+        return '%sB' % n
+
+    @staticmethod
+    def from_settings(path=None):
+        cf = ConfigParser.ConfigParser()
+        path = path or p.join(os.environ['HOME'], '.osscredentials')
+        cf.read(path)
+        options = dict(cf.items('OSSCredentials'))
+        return OSSCMD(options['accessid'], options['accesskey'], options['endpoint'], options['bucket'])
+
+
+def show_usage():
+    info = '''
+        %Usage: osscmd ls | get | put | url | rm | share
+            osscmd ls                               :   List all objects
+            osscmd get key path="./key"             :   Get object
+            osscmd put path key="`basename path`"   :   Put object
+            osscmd url url key                      :   Download given url
+            osscmd rm key                           :   Delete given object
+            osscmd share key expire=3               :   Share object with link
+    '''
+    print(info)
+    exit(1)
+
+
+if __name__ == '__main__':
+    if len(sys.argv) < 2:
+        print("Subcommand is required!")
+        show_usage()
+    action = sys.argv[1]
+    args = sys.argv[2:]
+    nargs = len(args)
+
+    # Use this if there is a settings file
+    # oss = OSSCMD.from_settings()
+    oss = OSSCMD()
+    if action == 'ls':
+        oss.list_files()
+    elif action == 'get':
+        if nargs < 1:
+            show_usage()
+        key = args[0]
+        path = p.basename(key)
+        if nargs > 1:
+            path = p.join(os.getcwd(), args[1])
+        oss.download(key, path)
+    elif action == 'put':
+        if nargs < 1:
+            show_usage()
+        path = p.join(os.getcwd(), args[0])
+
+        if p.isdir(path):
+            oss.upload_dir(path)
+        else:
+            key = args[1] if nargs >= 2 else p.basename(path)
+            oss.upload_file(path, key)
+    elif action == 'getd':
+        if nargs < 1:
+            show_usage()
+        dirname = args[0]
+        key = dirname + '.tar.gz'
+        path = p.join('/tmp/%s.tar.gz' % dirname)
+
+        target_dirpath = p.join(os.getcwd(), dirname)
+        # If already have dir with same name: `mv dir dir.bak`
+        if p.isdir(target_dirpath):
+            os.rename(target_dirpath, target_dirpath + '.bak')
+        oss.download(key, path)
+        tar = tarfile.open(path, 'r:gz')
+        tar.extractall()
+        tar.close()
+        os.remove(path)
+    elif action == 'url':
+        if nargs < 2:
+            show_usage()
+        url, key = args[0], args[1]
+        oss.upload_url(url, key)
+    elif action == 'rm':
+        if nargs < 1:
+            show_usage()
+        key = args[0]
+        oss.delete(key)
+    elif action == 'share':
+        if nargs < 1:
+            show_usage()
+        key = args[0]
+        oss.share(key)
+    else:
+        print("Command:%s is not supported!" % action)
+        show_usage()
