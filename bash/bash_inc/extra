@@ -6,7 +6,6 @@
 
 #—————————————————————————————————————————————————————————————————————————————#
 # Data Source
-alias cnzzdb_dev="mysql -htddl.daily.alibaba.net -uCNZZDB_APP -p123456 -P3306"
 alias up="cd %HOME/Dev;oss put elysium;"
 alias cdv="cd /Volumes/Data//vserver"
 alias cdpg="cd /usr/local/pgsql"
@@ -15,7 +14,6 @@ alias cdng="cd /usr/local/nginx"
 
 #—————————————————————————————————————————————————————————————————————————————#
 # Data Source
-alias cnzzdb_dev="mysql -htddl.daily.alibaba.net -uCNZZDB_APP -p123456 -P3306"
 #—————————————————————————————————————————————————————————————————————————————#
 
 #—————————————————————————————————————————————————————————————————————————————#
