@@ -2,7 +2,13 @@
 echo "#=================================================="
 echo "Configuring vim..."
 mkdir -p $HOME/.config_bak
-mv -f $HOME/.vim $HOME/.vimrc $HOME/.config_bak/
-ln -s $CONFIGURATION_HOME/vim $HOME/.vim
-ln -s $CONFIGURATION_HOME/vim/vimrc $HOME/.vimrc
+
+echo $PWD
+rm -rf $HOME/.config_bak/.vim
+rm -rf $HOME/.config_bak/.vimrc
+mv -f $HOME/.vim $HOME/.config_bak/vim
+mv -f $HOME/.vimrc $HOME/.config_bak/vimrc
+
+ln -s $PWD/vim $HOME/.vim
+ln -s $PWD/vim/vimrc.min $HOME/.vimrc
 echo "Vim configuration done..."

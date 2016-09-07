@@ -5,7 +5,36 @@
 #=============================================================================#
 
 #—————————————————————————————————————————————————————————————————————————————#
-#Easier navigation: .., ..., ...., ....., ~ and -
+# Conf Edit shortcuts
+alias virc='vim $HOME/.bashrc'
+alias viprofile='vim $HOME/.bash_profile'
+alias vipath='vim $HOME/.bash_inc/path'
+alias viexport='vim $HOME/.bash_inc/export'
+alias vialias='vim $HOME/.bash_inc/aliases'
+alias vifunction='vim $HOME/.bash_inc/functions'
+alias viextra='vim $HOME/.bash_inc/extra'
+alias vissh='vim $HOME/.ssh/config'
+alias vinginx='sudo vim /usr/local/nginx/nginx.conf'
+alias vikong='sudo vi /etc/kong/kong.yml'
+alias vihost='vi /etc/hosts'
+#—————————————————————————————————————————————————————————————————————————————#
+
+#—————————————————————————————————————————————————————————————————————————————#
+# Fast directories movement
+alias god='cd $HOME/Dev'
+alias gogo='cd $GOPATH'
+alias gog='cd $HOME/Git'
+alias gopg='cd /var/pgsql'
+alias gord='cd /var/redis'
+alias gong='cd /usr/local/nginx'
+alias golog='cd /var/log'
+alias goapilog='cd /var/log/openapi'
+alias godown='cd $HOME/Downloads'
+alias gousr='cd $HOME/usr'
+#—————————————————————————————————————————————————————————————————————————————#
+
+#—————————————————————————————————————————————————————————————————————————————#
+# Navigation aliases
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
@@ -13,11 +42,15 @@ alias .....="cd ../../../.."
 alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
 #—————————————————————————————————————————————————————————————————————————————#
-# Shortcuts
+
+#—————————————————————————————————————————————————————————————————————————————#
+# Application shortcuts
 alias g="git"
 alias h="history"
 alias j="jobs"
-alias p="python"
+alias p="ipython"
+alias qt="nohup jupyter qtconsole &"
+alias jb="cd $HOME/Notebook;nohup jupyter notebook >/dev/null &"
 #—————————————————————————————————————————————————————————————————————————————#
 # Alias for Zip / Unzip
 alias tarx="tar -zxvf"

@@ -17,38 +17,67 @@ MY_SCRIPT="$MY_USR/script"
 PATH="$MY_BIN:$MY_SCRIPT:$PATH"
 #—————————————————————————————————————————————————————————————————————————————#
 
-
 #—————————————————————————————————————————————————————————————————————————————#
-# Software
+# Development Environment
+#—————————————————————————————————————————————————————————————————————————————#
+
 #-----------------------------#
 # Python
 ANACONDA_HOME="/usr/local/anaconda"
 PATH="$ANACONDA_HOME/bin:$PATH"
-PYTHONPATH=/usr/local/anaconda/lib/python2.7/site-packages/
+
+#-----------------------------#
+
+
 #-----------------------------#
 # Java
+export JAVA_HOME=/usr/local/java
+export CLASSPATH=".:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar"
+
+PATH="$JAVA_HOME/bin:$PATH"
 # JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 # MAVEN_HOME=/Users/vonng/usr/local/apache-maven-3.3.3
 # M2_HOME=$MAVEN_HOME
-# PATH="$JAVA_HOME/bin:$PATH"
+#-----------------------------#
+
 #-----------------------------#
 # Go
-# GOROOT=/usr/local/go
-# GOPATH=$HOME/Dev/Go
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/Dev/Go
+
+PATH="$GOROOT/bin:$GOPATH/bin:$PATH"
+#-----------------------------#
+
 #-----------------------------#
 # Node
-# NODE_HOME=/usr/local/node
-# PATH="$NODE_HOME/bin:$PATH"
+NODE_HOME=/usr/local/node
+
+PATH="$NODE_HOME/bin:$PATH"
+
+# TNPM
+alias cnpm="npm --registry=https://registry.npm.taobao.org \
+--cache=$HOME/.npm/.cache/cnpm \
+--disturl=https://npm.taobao.org/dist \
+--userconfig=$HOME/.cnpmrc"
 #-----------------------------#
 # PostgreSQL
 PGSQL_HOME="/usr/local/pgsql"
+export PGDATA="/var/pgsql/data"
+
 PATH="$PGSQL_HOME/bin:$PATH"
-#—————————————————————————————————————————————————————————————————————————————#
+
+alias pgstart="/usr/local/pgsql/bin/pg_ctl start -l $PGDATA/log"
+alias pgstop="/usr/local/pgsql/bin/pg_ctl stop"
+#-----------------------------#
+
+#-----------------------------#
+# Redis
+REDIS_HOME="/usr/local/redis"
+alias redisstart="/etc/redis/redis_init_script start"
+alias redissttop="/etc/redis/redis_init_script stop"
+alias redis="redis-cli"
+#-----------------------------#
 
 #—————————————————————————————————————————————————————————————————————————————#
-# Export
 export PATH
-export PYTHONPATH
-export MY_USR
-export MY_SCRIPT
 #—————————————————————————————————————————————————————————————————————————————#

@@ -6,20 +6,7 @@
 
 #—————————————————————————————————————————————————————————————————————————————#
 # Linux Setup Info
-function setup_linux()
-{
-    echo "Dev:"
-    echo "osscmd get oss://vonng/conf.tar.gz conf.tar.gz ;tar -zxvf conf.tar.gz;cd conf;bash setup.sh;cd ..;rm -rf conf conf.tar.gz;"
 
-    echo "Prod:"
-    echo "osscmd get oss://vonng/conf.tar.gz conf.tar.gz ;tar -zxf conf.tar.gz;cd conf;bash setup.sh prod;cd ..;rm -rf conf conf.tar.gz;"
-
-    echo "Dev Update"
-    echo "oss getd conf;cd conf;bash setup.sh;cd ..;rm -rf conf;"
-
-    echo "Prod Update"
-    echo "oss getd conf;cd conf;bash setup.sh prod;cd ..;rm -rf conf;"
-}
 #—————————————————————————————————————————————————————————————————————————————#
 
 #—————————————————————————————————————————————————————————————————————————————#
@@ -47,29 +34,8 @@ function ossgui()
     $JRE_PATH -jar $OSS_PATH &
 }
 
-function ossget()
-{
-	osscmd get "oss://vonng/$1" $1;
-}
-
-function ossput()
-{
-	osscmd put "$1 oss://vonng/$1";
-}
-
 #—————————————————————————————————————————————————————————————————————————————#
 
-#—————————————————————————————————————————————————————————————————————————————#
-# SSH-key
-function sendkey()
-{
-    PUBLIC_KEY=$HOME/.ssh/id_rsa.pub
-    scp $PUBLIC_KEY "$1:~/key"
-    echo "Run: "
-    echo "      ssh $1"
-    echo "      cat key >> ~/.ssh/authorized_keys;rm -f key;"
-}
-#—————————————————————————————————————————————————————————————————————————————#
 
 #—————————————————————————————————————————————————————————————————————————————#
 # Simple calculator
