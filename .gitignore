@@ -10,4 +10,4 @@ Configuration.iml
 # Privacy
 ssh/
 bash/bash_inc/extra
-script/common/oss
+bin/common/oss
