@@ -1,83 +1,124 @@
-#!/usr/bin/env bash
+#!/bin/sh
 #=============================================================================#
 # Vonng's Path
-#   Author: vonng (fengruohang@outlook.com)
+#   Author: Vonng (fengruohang@outlook.com)
 #=============================================================================#
 
 #—————————————————————————————————————————————————————————————————————————————#
-# User's resource
-MY_USR="$HOME/usr"
-MY_BIN="$MY_USR/bin"
-MY_CONF="$MY_USR/conf"
-MY_LOCAL="$MY_USR/local"
-MY_INCLUDE="$MY_USR/include"
-MY_LIB="$MY_USR/lib"
-MY_SCRIPT="$MY_USR/script"
-
-PATH="$MY_BIN:$MY_SCRIPT:$PATH"
+# user's usr
+MY_USR="${HOME}/usr"
+MY_BIN="${MY_USR}/bin"
+MY_CONF="${MY_USR}/conf"
+MY_LOCAL="${MY_USR}/local"
+MY_INCLUDE="${MY_USR}/include"
+MY_LIB="${MY_USR}/lib"
+MY_SCRIPT="${MY_USR}/script"
 #—————————————————————————————————————————————————————————————————————————————#
 
-#—————————————————————————————————————————————————————————————————————————————#
-# Development Environment
-#—————————————————————————————————————————————————————————————————————————————#
 
-#-----------------------------#
+#—————————————————————————————————————————————————————————————————————————————#
 # Python
-ANACONDA_HOME="/usr/local/anaconda"
-PATH="$ANACONDA_HOME/bin:$PATH"
+ANACONDA_HOME="/usr/local/anaconda";
 
-#-----------------------------#
+alias p="ipython"
+alias qt="nohup jupyter qtconsole &"
+
+# Tsinghua anaconda mirror
+#conda config --add channels 'https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/'
+#conda config --set show_channel_urls yes
+
+# Tsinghua pip mirror
+#pip install -i https://pypi.tuna.tsinghua.edu.cn/simple some-package
+
+# Tsinghua pip mirror in ~/.pip/pip.conf
+#[global]
+#index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+#—————————————————————————————————————————————————————————————————————————————#
 
 
-#-----------------------------#
+#—————————————————————————————————————————————————————————————————————————————#
 # Java
-export JAVA_HOME=/usr/local/java
-export CLASSPATH=".:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar"
+JAVA_HOME=/usr/local/java
+CLASSPATH=".:${JAVA_HOME}/lib/dt.jar:${JAVA_HOME}/lib/tools.jar"
 
-PATH="$JAVA_HOME/bin:$PATH"
+# Mac JDK
 # JAVA_HOME=`/usr/libexec/java_home -v 1.8`
-# MAVEN_HOME=/Users/vonng/usr/local/apache-maven-3.3.3
-# M2_HOME=$MAVEN_HOME
-#-----------------------------#
+#—————————————————————————————————————————————————————————————————————————————#
 
-#-----------------------------#
+
+#—————————————————————————————————————————————————————————————————————————————#
 # Go
-export GOROOT=/usr/local/go
-export GOPATH=$HOME/Dev/Go
+GOROOT=/usr/local/go
+GOPATH=$HOME/Dev/go
+#—————————————————————————————————————————————————————————————————————————————#
 
-PATH="$GOROOT/bin:$GOPATH/bin:$PATH"
-#-----------------------------#
 
-#-----------------------------#
+#—————————————————————————————————————————————————————————————————————————————#
 # Node
 NODE_HOME=/usr/local/node
-
-PATH="$NODE_HOME/bin:$PATH"
 
 # TNPM
 alias cnpm="npm --registry=https://registry.npm.taobao.org \
 --cache=$HOME/.npm/.cache/cnpm \
 --disturl=https://npm.taobao.org/dist \
 --userconfig=$HOME/.cnpmrc"
-#-----------------------------#
+
+#npm install tnpm --registry=http://registry.npm.alibaba-inc.com
+#—————————————————————————————————————————————————————————————————————————————#
+
+
+#—————————————————————————————————————————————————————————————————————————————#
 # PostgreSQL
 PGSQL_HOME="/usr/local/pgsql"
-export PGDATA="/var/pgsql/data"
+PGDATA="/var/pgsql/data"
+PGCTL="${PGSQL_HOME}/bin/pg_ctl"
 
-PATH="$PGSQL_HOME/bin:$PATH"
+alias pgstart="${PGCTL} start -D ${PGDATA} -l ${PGDATA}/log"
+alias pgstop="${PGCTL} stop -D ${PGDATA}"
+alias pgrestart="${PGCTL} restart -D ${PGDATA}"
+alias pgreload="${PGCTL} reload"
+alias vipgconf="vim ${PGDATA}/postgresql.conf"
+alias vipghba="vim ${PGDATA}/pg_hba.conf"
+#—————————————————————————————————————————————————————————————————————————————#
 
-alias pgstart="/usr/local/pgsql/bin/pg_ctl start -l $PGDATA/log"
-alias pgstop="/usr/local/pgsql/bin/pg_ctl stop"
-#-----------------------------#
 
-#-----------------------------#
+#—————————————————————————————————————————————————————————————————————————————#
 # Redis
-REDIS_HOME="/usr/local/redis"
+REDIS_HOME="/usr/local/redis";
+REDIS_DATA="/var/redis";
 alias redisstart="/etc/redis/redis_init_script start"
 alias redissttop="/etc/redis/redis_init_script stop"
 alias redis="redis-cli"
-#-----------------------------#
+#—————————————————————————————————————————————————————————————————————————————#
+
 
 #—————————————————————————————————————————————————————————————————————————————#
+# Nginx
+NGINX_HOME="/usr/local/nginx"
+
+alias ving="vi ${NGINX_HOME}/nginx.conf"
+alias nginxstart="${NGINX_HOME}/nginx"
+alias nginxreload="sudo ${NGINX_HOME}/nginx -s reload"
+#—————————————————————————————————————————————————————————————————————————————#
+
+
+#—————————————————————————————————————————————————————————————————————————————#
+# Export
+PATH="${MY_BIN}:$PATH"
+PATH="${ANACONDA_HOME}/bin:$PATH"
+PATH="${JAVA_HOME}/bin:$PATH"
+PATH="${GOROOT}/bin:${GOPATH}/bin:$PATH"
+PATH="${NODE_HOME}/bin:$PATH"
+PATH="${PGSQL_HOME}/bin:$PATH"
+PATH="${NGINX_HOME}/bin:$PATH"
+
+export CLASSPATH
+export JAVA_HOME
+
+export GOROOT
+export GOPATH
+
+export PGDATA
+
 export PATH
 #—————————————————————————————————————————————————————————————————————————————#

@@ -6,38 +6,31 @@
 #=============================================================================#
 
 #—————————————————————————————————————————————————————————————————————————————#
-echo "#=============================================================#"
-echo "# Setup configurations"
+echo "————————————————————————————————"
+echo "conf setup begin"
 #—————————————————————————————————————————————————————————————————————————————#
-# Mode: prod | dev
-# Influence ssh config
-MODE=$1
-# Directory setup
-INSTALL_DIRECTORY=$HOME/usr/
-mkdir -p $INSTALL_DIRECTORY
-mkdir -p $INSTALL_DIRECTORY/bin
-mkdir -p $INSTALL_DIRECTORY/tmp
-mkdir -p $INSTALL_DIRECTORY/lib
-mkdir -p $INSTALL_DIRECTORY/conf
-mkdir -p $INSTALL_DIRECTORY/local
-mkdir -p $INSTALL_DIRECTORY/script
-mkdir -p $INSTALL_DIRECTORY/include
+# Directory
+MY_USR=$HOME/usr/
+mkdir -p ${MY_USR} ${MY_USR}/bin ${MY_USR}/local ${MY_USR}/conf ${MY_USR}/tmp
+#—————————————————————————————————————————————————————————————————————————————#
+# bin
+bin/setup
 #—————————————————————————————————————————————————————————————————————————————#
 # Bash
-bash/setup_bash.sh $MODE
+bash/setup
 #—————————————————————————————————————————————————————————————————————————————#
 # Git
-git/setup_git.sh $MODE
-#—————————————————————————————————————————————————————————————————————————————#
-# Vim
-vim/setup_vim.sh $MODE
+git/setup
 #—————————————————————————————————————————————————————————————————————————————#
 # SSH
-ssh/setup_ssh.sh $MODE
+ssh/setup
 #—————————————————————————————————————————————————————————————————————————————#
-# Script
- script/setup_script.sh $MODE
+# Host
+# host/setup
 #—————————————————————————————————————————————————————————————————————————————#
-echo "# Configuration setup done."
-echo "#=============================================================#"
+# Vim
+#curl https://j.mp/spf13-vim3 -L > spf13-vim.sh && sh spf13-vim.sh
+#—————————————————————————————————————————————————————————————————————————————#
+echo "Done"
+echo "————————————————————————————————"
 #—————————————————————————————————————————————————————————————————————————————#

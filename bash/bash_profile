@@ -6,14 +6,13 @@
 
 #—————————————————————————————————————————————————————————————————————————————#
 # Load bash_inc extensions
-# * ~/.bash_inc/path for extending `$PATH`.
-# * ~/.bash_inc/bash_prompt for customizing prompt.vi
-# * ~/.bash_inc/export for cutomizing environment.
-# * ~/.bash_inc/function for util functions.
-# * ~/.bash_inc/aliases for aliases.
+# * ~/.bash_inc/path for extending `$PATH` and program relative settings.
+# * ~/.bash_inc/prompt for customizing prompt.
+# * ~/.bash_inc/func for util functions.
+# * ~/.bash_inc/alias for aliases.
 # * ~/.bash_inc/extra for extra settings.
 #—————————————————————————————————————————————————————————————————————————————#
-for file in ~/.bash_inc/{path,bash_prompt,exports,aliases,functions,extra}; do
+for file in ~/.bash_inc/{prompt,path,func,alias,extra}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
@@ -73,4 +72,66 @@ complete -W "NSGlobalDomain" defaults;
 #—————————————————————————————————————————————————————————————————————————————#
 # Add `killall` tab completion for common apps
 complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
+#—————————————————————————————————————————————————————————————————————————————#
+
+#—————————————————————————————————————————————————————————————————————————————#
+# Vim
+# Make vim the default editor
+export EDITOR="vim";
+#—————————————————————————————————————————————————————————————————————————————#
+
+
+#—————————————————————————————————————————————————————————————————————————————#
+# Bash
+# Larger bash history (allow 32³ entries; default is 500)
+export HISTSIZE=32768;
+export HISTFILESIZE=$HISTSIZE;
+export HISTCONTROL=ignoredups;
+# Make some commands not show up in history
+#export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help";
+#—————————————————————————————————————————————————————————————————————————————#
+
+#—————————————————————————————————————————————————————————————————————————————#
+# Locale
+# Prefer US English and use UTF-8
+#export LANG="en_US.UTF-8";
+#export LC_ALL="en_US.UTF-8";
+#—————————————————————————————————————————————————————————————————————————————#
+
+#—————————————————————————————————————————————————————————————————————————————#
+# Man
+# Highlight section titles in manual pages
+export LESS_TERMCAP_md="${yellow}";
+
+# Don’t clear the screen after quitting a manual page
+export MANPAGER="less -X";
+#—————————————————————————————————————————————————————————————————————————————#
+
+#—————————————————————————————————————————————————————————————————————————————#
+# Grep
+# Always enable colored `grep` output
+export GREP_OPTIONS="--color=auto";
+#—————————————————————————————————————————————————————————————————————————————#
+
+#—————————————————————————————————————————————————————————————————————————————#
+# Homebrew
+# Link Homebrew casks in `/Applications` rather than `~/Applications`
+# export HOMEBREW_CASK_OPTS="--appdir=/Applications";
+#—————————————————————————————————————————————————————————————————————————————#
+
+#—————————————————————————————————————————————————————————————————————————————#
+# Maven
+# MAVEN_OPTS='-Xms256m -Xmx512m'
+#—————————————————————————————————————————————————————————————————————————————#
+
+#—————————————————————————————————————————————————————————————————————————————#
+# Node
+# ES6 Compatible Mode
+# NODE_ENV="development"
+# NODE="`which node` --use-strict $(node --v8-options | grep harm | awk '{print $1}' | xargs)"
+#—————————————————————————————————————————————————————————————————————————————#
+
+#—————————————————————————————————————————————————————————————————————————————#
+# Other
+export MY_IPHONE_MAC="fc:fc:48:d1:20:c9"
 #—————————————————————————————————————————————————————————————————————————————#
