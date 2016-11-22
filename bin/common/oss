@@ -13,14 +13,21 @@ except:
     import configparser as ConfigParser
 import tarfile
 
-auth = oss2.Auth('A0i46bBuWPUQjUzN', 'TvcsQxOTPCwRDU3nRGMfdEzmWN2bsN')
-service = oss2.Service(auth, 'oss-cn-hangzhou-zmf.aliyuncs.com')
-buc = oss2.Bucket(auth, 'oss-cn-hangzhou-zmf.aliyuncs.com', 'vonng')
+DEFAULT_APPKEY='<your_appkey_here>'
+DEFAULT_APPSECRET='<your_appsecret_here>'
+DEFAULT_ENDPOINT='<your_appkey_here>'
+DEFAULT_BUCKET='<default_bucket_here>'
+
+
+
+auth = oss2.Auth(DEFAULT_APPKEY, DEFAULT_APPSECRET)
+service = oss2.Service(auth, DEFAULT_ENDPOINT)
+buc = oss2.Bucket(auth, DEFAULT_ENDPOINT, DEFAULT_BUCKET)
 
 
 class OSSCMD(object):
-    def __init__(self, access_id='A0i46bBuWPUQjUzN', access_key='TvcsQxOTPCwRDU3nRGMfdEzmWN2bsN',
-                 end_point='oss-cn-hangzhou-zmf.aliyuncs.com', bucket='vonng'):
+    def __init__(self, access_id=DEFAULT_APPKEY, access_key=DEFAULT_APPSECRET,
+                 end_point=DEFAULT_ENDPOINT, bucket=DEFAULT_BUCKET):
         self.auth = oss2.Auth(access_id, access_key)
         self.service = oss2.Service(self.auth, end_point)
         self.bucket = oss2.Bucket(self.auth, end_point, bucket)
