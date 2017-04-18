@@ -12,7 +12,7 @@
 # * ~/.bash_inc/alias for aliases.
 # * ~/.bash_inc/extra for extra settings.
 #—————————————————————————————————————————————————————————————————————————————#
-for file in ~/.bash_inc/{prompt,path,func,alias,extra}; do
+for file in ~/.bash_inc/{prompt,path,func,alias,extra,private}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
@@ -111,27 +111,4 @@ export MANPAGER="less -X";
 # Grep
 # Always enable colored `grep` output
 export GREP_OPTIONS="--color=auto";
-#—————————————————————————————————————————————————————————————————————————————#
-
-#—————————————————————————————————————————————————————————————————————————————#
-# Homebrew
-# Link Homebrew casks in `/Applications` rather than `~/Applications`
-# export HOMEBREW_CASK_OPTS="--appdir=/Applications";
-#—————————————————————————————————————————————————————————————————————————————#
-
-#—————————————————————————————————————————————————————————————————————————————#
-# Maven
-# MAVEN_OPTS='-Xms256m -Xmx512m'
-#—————————————————————————————————————————————————————————————————————————————#
-
-#—————————————————————————————————————————————————————————————————————————————#
-# Node
-# ES6 Compatible Mode
-# NODE_ENV="development"
-# NODE="`which node` --use-strict $(node --v8-options | grep harm | awk '{print $1}' | xargs)"
-#—————————————————————————————————————————————————————————————————————————————#
-
-#—————————————————————————————————————————————————————————————————————————————#
-# Other
-export MY_IPHONE_MAC="fc:fc:48:d1:20:c9"
 #—————————————————————————————————————————————————————————————————————————————#

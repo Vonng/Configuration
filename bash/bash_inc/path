@@ -18,10 +18,10 @@ MY_SCRIPT="${MY_USR}/script"
 
 #—————————————————————————————————————————————————————————————————————————————#
 # Python
-ANACONDA_HOME="/usr/local/anaconda";
+PYTHONHOME="/usr/local/anaconda";
+PYTHONPATH="/usr/local/anaconda/lib";
 
-alias p="ipython"
-alias qt="nohup jupyter qtconsole &"
+export PYTHONHOME
 
 # Tsinghua anaconda mirror
 #conda config --add channels 'https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/'
@@ -39,17 +39,23 @@ alias qt="nohup jupyter qtconsole &"
 #—————————————————————————————————————————————————————————————————————————————#
 # Java
 JAVA_HOME=/usr/local/java
+if [ "$(uname)" == "Darwin" ]; then
+    JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+fi
 CLASSPATH=".:${JAVA_HOME}/lib/dt.jar:${JAVA_HOME}/lib/tools.jar"
 
-# Mac JDK
-# JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+export CLASSPATH
+export JAVA_HOME
 #—————————————————————————————————————————————————————————————————————————————#
 
 
 #—————————————————————————————————————————————————————————————————————————————#
 # Go
 GOROOT=/usr/local/go
-GOPATH=$HOME/Dev/go
+GOPATH=$HOME/go
+
+export GOROOT
+export GOPATH
 #—————————————————————————————————————————————————————————————————————————————#
 
 
@@ -73,22 +79,14 @@ PGSQL_HOME="/usr/local/pgsql"
 PGDATA="/var/pgsql/data"
 PGCTL="${PGSQL_HOME}/bin/pg_ctl"
 
-alias pgstart="${PGCTL} start -D ${PGDATA} -l ${PGDATA}/log"
+export PGDATA
+
+alias pgstart="PYTHONPATH=${PYTHONPATH} ${PGCTL} start -D ${PGDATA} -l ${PGDATA}/log"
 alias pgstop="${PGCTL} stop -D ${PGDATA}"
-alias pgrestart="${PGCTL} restart -D ${PGDATA}"
+alias pgrestart="$PYTHONPATH=${PYTHONPATH} {PGCTL} restart -D ${PGDATA}"
 alias pgreload="${PGCTL} reload"
 alias vipgconf="vim ${PGDATA}/postgresql.conf"
 alias vipghba="vim ${PGDATA}/pg_hba.conf"
-#—————————————————————————————————————————————————————————————————————————————#
-
-
-#—————————————————————————————————————————————————————————————————————————————#
-# Redis
-REDIS_HOME="/usr/local/redis";
-REDIS_DATA="/var/redis";
-alias redisstart="/etc/redis/redis_init_script start"
-alias redissttop="/etc/redis/redis_init_script stop"
-alias redis="redis-cli"
 #—————————————————————————————————————————————————————————————————————————————#
 
 
@@ -97,28 +95,27 @@ alias redis="redis-cli"
 NGINX_HOME="/usr/local/nginx"
 
 alias ving="vi ${NGINX_HOME}/nginx.conf"
-alias nginxstart="${NGINX_HOME}/nginx"
-alias nginxreload="sudo ${NGINX_HOME}/nginx -s reload"
+alias ngstart="${NGINX_HOME}/nginx"
+alias ngreload="sudo ${NGINX_HOME}/nginx -s reload"
 #—————————————————————————————————————————————————————————————————————————————#
 
 
 #—————————————————————————————————————————————————————————————————————————————#
-# Export
+# Homebrew
+# /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
+#—————————————————————————————————————————————————————————————————————————————#
+
+
+#—————————————————————————————————————————————————————————————————————————————#
+# PATH
 PATH="${MY_BIN}:$PATH"
-PATH="${ANACONDA_HOME}/bin:$PATH"
-PATH="${JAVA_HOME}/bin:$PATH"
-PATH="${GOROOT}/bin:${GOPATH}/bin:$PATH"
-PATH="${NODE_HOME}/bin:$PATH"
-PATH="${PGSQL_HOME}/bin:$PATH"
-PATH="${NGINX_HOME}/bin:$PATH"
-
-export CLASSPATH
-export JAVA_HOME
-
-export GOROOT
-export GOPATH
-
-export PGDATA
+PATH="${PYTHONHOME}/bin:$PATH"
+PATH="$PATH:${JAVA_HOME}/bin"
+PATH="$PATH:${GOROOT}/bin:${GOPATH}/bin"
+PATH="$PATH:${NODE_HOME}/bin"
+PATH="$PATH:${PGSQL_HOME}/bin"
+PATH="$PATH:${NGINX_HOME}/bin"
 
 export PATH
 #—————————————————————————————————————————————————————————————————————————————#

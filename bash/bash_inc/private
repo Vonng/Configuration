@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+#=============================================================================#
+# Vonng's private alias
+#   Author: vonng (fengruohang@outlook.com)
+#=============================================================================#
+
+#—————————————————————————————————————————————————————————————————————————————#
+# Fast ssh
+
+alias et="ssh et";
+alias a0="ssh a0";
+alias a1="ssh a1";
+alias a2="ssh a2";
+alias a3="ssh a3";
+alias a4="ssh a4";
+alias a5="ssh a5";
+alias a6="ssh a6";
+alias a7="ssh a7";
+alias a8="ssh a8";
+
+alias cdev="ssh cdev"
+alias cpre="ssh cpre"
+alias c1="ssh c1"
+alias c2="ssh c2"
+
+#—————————————————————————————————————————————————————————————————————————————#
+# Fast directories movement
+alias dev="cd ~/Dev"
+alias down="cd ~/Downloads"
+alias gog="cd ${GOPATH}/src"
+alias golog="cd ~/logs/"
+
+#—————————————————————————————————————————————————————————————————————————————#
+# oss shortcuts
+alias ossls="oss ls"
+alias ossup="oss up"
+alias osspu="oss pull && cd .;"
+
+function getdir(){
+    oss getd $1 && cd $1;
+}
+
+alias ossget="oss get"
+alias ossput="oss put"
+#—————————————————————————————————————————————————————————————————————————————#
