@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #=============================================================================#
 # Vonng's bin setup script
 #   Author: Vonng (fengruohang@outlook.com)
@@ -24,13 +24,13 @@ PLATFORM=`uname -a | awk  '{print $1}'`
 MY_BIN="${HOME}/usr/bin/"
 mkdir -p ${MY_BIN}
 
-cp -r ${SRC_HOME}/common/* ${MY_BIN}/
+# cp -r ${SRC_HOME}/common/* ${MY_BIN}/
 case ${PLATFORM} in
     Linux)
-        cp -r ${SRC_HOME}/linux/* ${MY_BIN}/
+        cp oss.linux ${MY_BIN}/oss
         ;;
     Darwin)
-        cp -r ${SRC_HOME}/darwin/* ${MY_BIN}/
+        cp oss.darwin ${MY_BIN}/oss
         ;;
     *)
         echo "Platform not supported!"

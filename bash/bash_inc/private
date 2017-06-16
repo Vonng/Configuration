@@ -1,45 +1,33 @@
 #!/usr/bin/env bash
 #=============================================================================#
-# Vonng's private alias
+# Vonng's private settings
 #   Author: vonng (fengruohang@outlook.com)
 #=============================================================================#
 
+
+#=============================================================================#
+# oss                                                                         #
 #—————————————————————————————————————————————————————————————————————————————#
-# Fast ssh
+alias ols="oss ls"
+alias orm="oss del"
+alias ogt="oss get"
+alias ogd="oss getd"
+alias opt="oss put"
 
-alias et="ssh et";
-alias a0="ssh a0";
-alias a1="ssh a1";
-alias a2="ssh a2";
-alias a3="ssh a3";
-alias a4="ssh a4";
-alias a5="ssh a5";
-alias a6="ssh a6";
-alias a7="ssh a7";
-alias a8="ssh a8";
-
-alias cdev="ssh cdev"
-alias cpre="ssh cpre"
-alias c1="ssh c1"
-alias c2="ssh c2"
-
-#—————————————————————————————————————————————————————————————————————————————#
-# Fast directories movement
-alias dev="cd ~/Dev"
-alias down="cd ~/Downloads"
-alias gog="cd ${GOPATH}/src"
-alias golog="cd ~/logs/"
-
-#—————————————————————————————————————————————————————————————————————————————#
-# oss shortcuts
-alias ossls="oss ls"
-alias ossup="oss up"
-alias osspu="oss pull && cd .;"
-
-function getdir(){
-    oss getd $1 && cd $1;
+function ossgui()
+{
+    JRE_PATH=/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/bin/java
+    OSS_PATH=/Users/vonng/usr/bin/ossbrowser.jar
+    cd $HOME/usr/tmp
+    $JRE_PATH -jar $OSS_PATH &
 }
-
-alias ossget="oss get"
-alias ossput="oss put"
 #—————————————————————————————————————————————————————————————————————————————#
+
+
+#—————————————————————————————————————————————————————————————————————————————#
+# Data Source
+alias cnzzdb_dev="mysql -htddl.daily.alibaba.net -uCNZZDB_APP -p123456 -P3306"
+alias cplusdb="psql -h 10.182.7.104 -p 3010"
+export RDS="postgres://10.182.7.104:3010/cplus"
+#—————————————————————————————————————————————————————————————————————————————#
+

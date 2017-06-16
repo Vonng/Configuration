@@ -1,3 +1,22 @@
-#!/usr/bin/env bash
-# Invoke when shell starting a interactive shell
-[ -n "$PS1" ] && source ~/.bash_profile;
+#!/usr/bash
+#=============================================================================#
+# Vonng's .bashrc
+#   Author: vonng (fengruohang@outlook.com)
+#   for non-login and interactive shell
+#=============================================================================#
+
+
+#=============================================================================#
+# Load bash_inc extensions
+#—————————————————————————————————————————————————————————————————————————————#
+# * ~/.bash_inc/prompt for customizing prompt.
+# * ~/.bash_inc/env for environment variables
+# * ~/.bash_inc/util for useful alias & functions
+# * ~/.bash_inc/private for private settings.
+#—————————————————————————————————————————————————————————————————————————————#
+for file in ~/.bash_inc/{prompt,env,util,private}; do
+    [ -r "$file" ] && [ -f "$file" ] && source "$file";
+done;
+unset file;
+#=============================================================================#
+

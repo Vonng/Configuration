@@ -8,6 +8,7 @@ Configuration.iml
 .DS_Store
 
 # Privacy
+bash/bash_inc/private
 ssh/
 bash/bash_inc/extra
 bin/common/oss
