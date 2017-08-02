@@ -93,10 +93,9 @@ alias vi="vim"
 alias vivim='vim $HOME/.vimrc'
 alias virc='vim $HOME/.bashrc'
 alias viprofile='vim $HOME/.bash_profile'
-alias vipath='vim $HOME/.bash_inc/path'
-alias vialias='vim $HOME/.bash_inc/alias'
-alias vifunc='vim $HOME/.bash_inc/func'
-alias viprivate='vim $HOME/.bash_inc/extra'
+alias vienv='vim $HOME/.bash_inc/env'
+alias viutil='vim $HOME/.bash_inc/util'
+alias viprivate='vim $HOME/.bash_inc/private'
 alias vissh='vim $HOME/.ssh/config'
 alias vihost='vi /etc/hosts'
 #=============================================================================#
@@ -315,14 +314,22 @@ function pgschema(){
 #=============================================================================#
 # encoding                                                                    #
 #—————————————————————————————————————————————————————————————————————————————#
+# length
+alias len='python -c "import sys;print(len(sys.argv[1]))"'
+
 # Format convert
 alias yaml2json='ruby -ryaml -rjson -e "puts JSON.pretty_generate(YAML.load(STDIN.read))"'
 alias json2yaml='ruby -ryaml -rjson -e "puts YAML.dump(JSON.parse(STDIN.read))"'
-# URL-encode strings
-alias urlencode='python -c "import sys, urllib as ul; print ul.quote(sys.argv[1]);"'
-alias urldecode='python -c "import sys, urllib as ul; print ul.unquote(sys.argv[1]);"'
-alias b64encode='python -c "import sys,base64 as b;print b.b64encode(sys.argv[1]);"'
-alias b64decode='python -c "import sys,base64 as b;print b.b64decode(sys.argv[1]);"'
+
+# URL
+alias urlenc='python -c "import sys, urllib as ul; print(ul.quote(sys.argv[1]));"'
+alias urldec='python -c "import sys, urllib as ul; print(ul.unquote(sys.argv[1]));"'
+
+# Base64
+alias b64enc='python -c "import sys,base64 as b;print(b.b64encode(sys.argv[1]));"'
+alias b64dec='python -c "import sys,base64 as b;print(b.b64decode(sys.argv[1]));"'
+
+
 #—————————————————————————————————————————————————————————————————————————————#
 # Create a data URL from a file
 function dataurl() {
@@ -354,7 +361,7 @@ function escape() {
 }
 #—————————————————————————————————————————————————————————————————————————————#
 # Decode \x{ABCD}-style Unicode escape sequences
-function unidecode() {
+function unidec() {
     perl -e "binmode(STDOUT, ':utf8'); print \"$@\"";
     # print a newline unless we’re piping the output to another program
     if [ -t 1 ]; then
@@ -377,9 +384,11 @@ function codepoint() {
 # network                                                                     #
 #—————————————————————————————————————————————————————————————————————————————#
 # IP addresses
-alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
-alias localip="ipconfig getifaddr en0"
-alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+# all ip / local ip / public ip
+alias ip="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+alias localip="ifconfig getifaddr en0"
+alias pubip="dig +short myip.opendns.com @resolver1.opendns.com"
+
 
 # Traffic
 alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
@@ -446,6 +455,15 @@ function c (){
         VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args "$@";
     fi;
 }
+
+function code (){
+    if [ $# -eq 0 ]; then
+        VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args ".";
+    else
+        VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args "$@";
+    fi;
+}
+
 #—————————————————————————————————————————————————————————————————————————————#
 # OS X hash
 command -v md5sum > /dev/null || alias md5sum="md5"

@@ -2,7 +2,8 @@
 	email = ruohang.frh@alibaba-inc.com
 	name = 墨航
 [alias]
-	st = status
+	st=status
+	pu=push origin master
 	fetchv=fetch -v
 	pullv=pull -v
 	addtracked=add -u

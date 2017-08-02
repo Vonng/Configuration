@@ -6,6 +6,30 @@
 
 
 #=============================================================================#
+# ENV                                                                         #
+#—————————————————————————————————————————————————————————————————————————————#
+ENV="dev"
+if [ "$(uname)" == "Linux" ]; then
+    ENV="prod"
+fi
+
+export ENV
+#—————————————————————————————————————————————————————————————————————————————#
+
+
+#=============================================================================#
+# ENV                                                                         #
+#—————————————————————————————————————————————————————————————————————————————#
+ENV="dev"
+if [ "$(uname)" == "Linux" ]; then
+    ENV="prod"
+fi
+
+export ENV
+#—————————————————————————————————————————————————————————————————————————————#
+
+
+#=============================================================================#
 # usr                                                                         #
 #—————————————————————————————————————————————————————————————————————————————#
 MY_USR="${HOME}/usr"
@@ -25,14 +49,24 @@ fi
 # python                                                                      #
 #—————————————————————————————————————————————————————————————————————————————#
 # user's anaconda will overwrite system's
-PYTHONHOME="/usr/local/anaconda"
-if [ -d "${HOME}/anaconda" ]; then
-    PYTHONHOME="${HOME}/anaconda";
-    export PYTHONHOME
+if [ -d "/usr/local/anaconda" ]; then
+    export PYTHONHOME="/usr/local/anaconda";
     PATH="${PYTHONHOME}/bin:${PATH}"
-else
-    unset PYTHONHOME
 fi
+
+if [ -d "${HOME}/anaconda" ]; then
+    export PYTHONHOME="${HOME}/anaconda";
+    PATH="${PYTHONHOME}/bin:${PATH}"
+
+fi
+
+# Optional lib/include path
+if [ $PYTHONHOME ]; then
+    C_INCLUDE_PATH="${PYTHONHOME}/include/:$LD_LIBRARY_PATH"
+    LIBRARY_PATH="${PYTHONHOME}/lib/:$LD_LIBRARY_PATH"
+    LD_LIBRARY_PATH="${PYTHONHOME}/lib/:$LD_LIBRARY_PATH"
+fi
+
 #=============================================================================#
 
 
@@ -57,21 +91,14 @@ fi
 #=============================================================================#
 # go                                                                          #
 #—————————————————————————————————————————————————————————————————————————————#
-GOROOT="/usr/local/go"
-GOPATH="${HOME}/go"
-
-if [ -d "${GOROOT}" ]; then
-    export GOROOT
-    PATH="${PATH}:${GOROOT}/bin"
-else
-    unset GOROOT
+if [ -d "/usr/local/go" ]; then
+    export GOROOT="/usr/local/go"
+    PATH="${GOROOT}/bin:${PATH}"
 fi
 
-if [ -d "${GOPATH}" ]; then
-    export GOPATH
-    PATH="${PATH}:${GOPATH}/bin"
-else
-    unset GOPATH
+if [ -d "${HOME}/go" ]; then
+    export GOPATH="${HOME}/go"
+    PATH="${GOPATH}/bin:${PATH}"
 fi
 #=============================================================================#
 
@@ -79,12 +106,9 @@ fi
 #=============================================================================#
 # node                                                                          #
 #—————————————————————————————————————————————————————————————————————————————#
-NODE_HOME="/usr/local/node"
-if [ -d "${NODE_HOME}" ]; then
-    export NODE_HOME
+if [ -d "/usr/local/node" ]; then
+    export NODE_HOME="/usr/local/node"
     PATH="$PATH:${NODE_HOME}/bin"
-else
-    unset NODE_HOME
 fi
 #=============================================================================#
 
@@ -92,12 +116,9 @@ fi
 #=============================================================================#
 # nginx                                                                       #
 #—————————————————————————————————————————————————————————————————————————————#
-NGINX_HOME="/usr/local/nginx"
-if [ -d "${NGINX_HOME}" ]; then
-    export NGINX_HOME
+if [ -d "/usr/local/nginx" ]; then
+    export NGINX_HOME="/usr/local/nginx"
     PATH="$PATH:${NGINX_HOME}/bin"
-else
-    unset NGINX_HOME
 fi
 #=============================================================================#
 
@@ -106,15 +127,22 @@ fi
 # postgres                                                                    #
 #—————————————————————————————————————————————————————————————————————————————#
 # PostgreSQL
-export PG_HOME="/usr/local/pgsql"
-export PGDATA="/var/lib/pgsql/data"
 
-if [ -d "${PG_HOME}" ]; then
-    export PGDATA
-    export PG_HOME
+if [ -d "/usr/local/pgsql" ]; then
+    export PG_HOME="/usr/local/pgsql"
+    export PGDATA="/var/lib/pgsql/data"
     PATH="$PATH:${PG_HOME}/bin"
-else
-    unset PGDATA
+fi
+
+if [ -d "/var/lib/pgsql" ]; then
+    export PGDATA="/var/lib/pgsql/data"
+fi
+
+# Optional lib/include path
+if [ $PG_HOME ]; then
+    C_INCLUDE_PATH="${PG_HOME}/include/:$LD_LIBRARY_PATH"
+    LIBRARY_PATH="${PG_HOME}/lib/:$LD_LIBRARY_PATH"
+    LD_LIBRARY_PATH="${PG_HOME}/lib/:$LD_LIBRARY_PATH"
 fi
 #=============================================================================#
 
@@ -134,4 +162,7 @@ fi
 # path                                                                        #
 #—————————————————————————————————————————————————————————————————————————————#
 export PATH
+# export C_INCLUDE_PATH
+# export LIBRARY_PATH
+# export LD_LIBRARY_PATH
 #=============================================================================#

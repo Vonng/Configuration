@@ -26,8 +26,8 @@ function ossgui()
 
 #—————————————————————————————————————————————————————————————————————————————#
 # Data Source
-alias cnzzdb_dev="mysql -htddl.daily.alibaba.net -uCNZZDB_APP -p123456 -P3306"
-alias cplusdb="psql -h 10.182.7.104 -p 3010"
+alias cnzzdb="mysql -htddl.daily.alibaba.net -uCNZZDB_APP -p123456 -P3306"
 export RDS="postgres://10.182.7.104:3010/cplus"
+export APP="postgres://app:appapp@localhost/app"
 #—————————————————————————————————————————————————————————————————————————————#
 
