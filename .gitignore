@@ -1,5 +1,6 @@
 # Created by .ignore support plugin (hsz.mobi)
 
+
 # IDE Files
 .idea/
 Configuration.iml
@@ -10,5 +11,5 @@ Configuration.iml
 # Privacy
 bash/bash_inc/private
 ssh/
-bash/bash_inc/extra
-bin/common/oss
+bin/oss.darwin
+bin/oss.linux
