@@ -9,9 +9,7 @@
 # Bash                                                                        #
 #—————————————————————————————————————————————————————————————————————————————#
 # Custome prompt for login shell
-PROMPT_FILE="~/.bash_inc/prompt"
-[ -r "${PROMPT_FILE}" ] && [ -f "${PROMPT_FILE}" ] && source "${PROMPT_FILE}";
-unset PROMPT_FILE
+[[ -r ~/.bash_inc/prompt ]] && source ~/.bash_inc/prompt
 
 # Bashrc for login/no-login shell
 [[ -r ~/.bashrc ]] && . ~/.bashrc
