@@ -1,14 +1,19 @@
 #!/usr/bin/env bash
 #=============================================================================#
 # Vonng's Bash Profile
-#   Author: vonng (fengruohang@outlook.com)
+#   Author: Vonng (fengruohang@outlook.com)
 #=============================================================================#
 
 
 #=============================================================================#
 # Bash                                                                        #
 #—————————————————————————————————————————————————————————————————————————————#
-# Bashrc
+# Custome prompt for login shell
+PROMPT_FILE="~/.bash_inc/prompt"
+[ -r "${PROMPT_FILE}" ] && [ -f "${PROMPT_FILE}" ] && source "${PROMPT_FILE}";
+unset PROMPT_FILE
+
+# Bashrc for login/no-login shell
 [[ -r ~/.bashrc ]] && . ~/.bashrc
 #—————————————————————————————————————————————————————————————————————————————#
 # History
@@ -27,9 +32,6 @@ export EDITOR="vim";
 # Man
 export LESS_TERMCAP_md="${yellow}";     #Highlight man page title
 export MANPAGER="less -X";
-#—————————————————————————————————————————————————————————————————————————————#
-# Grep
-export GREP_OPTIONS="--color=auto"; # colored grep
 #=============================================================================#
 
 
