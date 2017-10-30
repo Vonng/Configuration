@@ -269,6 +269,17 @@ alias qt="nohup jupyter qtconsole &"
 
 
 #=============================================================================#
+# homebrew                                                                    #
+#—————————————————————————————————————————————————————————————————————————————#
+# Install
+# /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+# Mirror
+#export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
+#=============================================================================#
+
+
+#=============================================================================#
 # nginx                                                                       #
 #—————————————————————————————————————————————————————————————————————————————#
 alias ving="vi ${NGINX_HOME}/nginx.conf"
