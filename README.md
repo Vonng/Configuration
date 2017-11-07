@@ -1,24 +1,20 @@
 
 Configuration
 -----------------------------
-Vonng's configuration
+Vonng's configuration files
+
 
 
 ## Install
 
-------------------
 ```
 ./setup.sh
 ```
 
+
+
 ## Description
 
-* App Settings
-    * [AutoHotKey-Capslock](app/ahk/)
-    * [Karabiner-Capslock](app/karabiner/)
-    * [Slate](app/slate/)
-    * [Tmux](app/tmux/)
-    * [IntelliJ](app/idea)
 * Bash Settings
     * [bash_profile](bash/bash_profile)
     * [bashrc](bash/bashrc)
@@ -28,9 +24,9 @@ Vonng's configuration
         * [private](bash/bash_inc/private)
 * Git Settings
     * [gitconfig](git/gitconfig)
-* SSH Settings
-* Host Settings
-* Binary utils
-      
-
+* App Settings
+    - [Karabiner-Capslock](app/karabiner/)
+    - [AutoHotKey-Capslock](app/ahk/)
+* SSH Settings: [Private]
+* Binary utils: [Private]
 
