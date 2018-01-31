@@ -9,7 +9,9 @@ Configuration.iml
 .DS_Store
 
 # Privacy
-bash/bash_inc/private
+shit/.private
 ssh/
 bin/oss.darwin
 bin/oss.linux
+
+
