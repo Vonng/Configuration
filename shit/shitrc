@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+# You must run `source .shit/main` before execute this
+
+import env
+import path
+import color
+import prompt
+import log
+import completion
+import coreutils
+import crypto
+import encoding
+import net
+import pg
+import string
+import sync
+import time
+
+case $(uname) in
+    Darwin ) import darwin ;;
+    Linux  ) import linux  ;;
+esac
+
+set +e
+
+[[ -f ${HOME}/.private ]] && source ${HOME}/.private

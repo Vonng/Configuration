@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+#==============================================================#
+# Author: Vonng(fengruohang@outlook.com)                       #
+# Desc  : Bash Profile                                         #
+#==============================================================#
+
+[[ -r "$HOME/.bashrc" ]] && source $HOME/.bashrc
+[[ -f "$HOME/.shit/main" ]] && source $HOME/.shit/main
+[[ -f "$HOME/.shit/shitrc" ]] && source $HOME/.shit/shitrc
+

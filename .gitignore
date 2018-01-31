@@ -4,12 +4,16 @@
 # IDE Files
 .idea/
 Configuration.iml
+shit/shit.iml
+shit/.idea
 
 # Sys Files
 .DS_Store
 
 # Privacy
 shit/.private
+
+
 ssh/
 bin/oss.darwin
 bin/oss.linux

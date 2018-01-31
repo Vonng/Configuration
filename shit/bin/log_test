@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+
+source ${HOME}/.shit/main
+
+import color
+import log
+
+log_level debug
+log_time_fmt datetime
+
+log_debug '`log_level debug` `log_time_fmt datetime` debug message'
+log_info info level message, now set LOG_LEVEL from debug to info
+
+log_level info
+log_warn $(color_msg r "datetime") "Warning: set log level to info, debug message will no longer displayed"
+log_debug "now you can't see debug message"
+log_info "but you can still see info message"
+
+log_time_fmt t
+log_info "time fmt set to short time fmt: " '`log_time_fmt time`'
+log_error $(color_msg r Hello) $(color_msg blue world)
+
+#log_fatal "fatal message will exit script directly"
+log_info "So no chance you could see this"
+log_warn "this time log will put to ./log file"
+
+
+# switch output to file (disable color)
+# LOG_PATH="./log"
+

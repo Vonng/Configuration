@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+#==============================================================#
+# Author: Vonng(fengruohang@outlook.com)                       #
+# Desc  : Bash Standard Library Core                           #
+# Usage : source <path to this file>                           #
+#==============================================================#
+
+#--------------------------------------------------------------#
+# global variable
+#--------------------------------------------------------------#
+declare -g -x OS=$(uname)
+declare -g -x SHIT_PATH=${SHTI_PATH:=${HOME}/.shit}
+if [[ ! -d ${SHIT_PATH} ]]; then
+    PROGDIR="$(cd $(dirname $0) && pwd)"
+
+fi
+
+#--------------------------------------------------------------#
+# public function                                              #
+# import bash library in ${SHIT_PATH}                          #
+# $1 :  package name (e.g: log color ...)                      #
+#--------------------------------------------------------------#
+function __import(){
+    local package=${1}
+    local include_marco="__MODULE_$(echo $1 | tr '[:lower:]' '[:upper:]')"
+
+    # already import
+    if [[ -n "${!include_marco}" ]]
+    then
+        return 0
+    fi
+
+    package="${SHIT_PATH}/lib/${package%.sh}.sh"
+    if [[ -f ${package} ]]
+    then
+        source ${package}
+        return 0
+    else
+        return 1
+    fi
+}
+
+#--------------------------------------------------------------#
+function import(){
+    for pkg in $@
+    do
+        __import ${pkg}
+    done
+}
+#==============================================================#
